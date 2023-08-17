@@ -1,0 +1,33 @@
+# mypy: disable-error-code=name-undefined
+# pyright: reportUndefinedVariable=false, reportUnknownMemberType=false
+# ruff: noqa:E501,F821
+
+# Settings
+analytics_settings(enable=False)
+ci_settings(
+    k8s_grace_period="",
+    timeout="30m",
+)
+docker_prune_settings(disable=False, max_age_mins=360, num_builds=0, interval_hrs=24, keep_recent=10)
+update_settings(max_parallel_updates=3, k8s_upsert_timeout_secs=30, suppress_unused_image_warnings=None)
+version_settings(check_updates=False)
+
+docker_build(
+    ref="docker.io/service-1",
+    context="../../../service-1",
+    build_args={"BUILD_TYPE": "dev-test"},
+    dockerfile="../../../service-1/Dockerfile",
+    target="dev-test",
+    live_update=["../../../service-1/src", "/workspace/service-1/src"],
+)
+
+k8s_yaml(helm("../../charts/tech-stack", name="tech-stack", values="values.yaml"))
+
+k8s_resources(
+    workload="service-1",
+    labels=["Backend"],
+    port_forwards=port_forward(local_port=5000, container_port=5000, name="Swagger", link_path="/docs"),
+    # resource_deps=[
+    #     "migrations"
+    # ],
+)
