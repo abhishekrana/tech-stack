@@ -28,3 +28,13 @@ RUN cat ~/.bashrc | grep 'source /usr/share/bash-completion/completions/task.bas
     echo "source /usr/share/bash-completion/completions/task.bash" >>~/.bashrc
 RUN poetry completions bash >> ~/.bash_completion
 
+ENV PIP_DEFAULT_TIMEOUT=60 \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=1 \
+    POETRY_VIRTUALENVS_IN_PROJECT=1
+
+# Service-1
+COPY --chown=${USERNAME}:${USERNAME} service-1/pyproject.toml service-1/poetry.lock ${HOME}/service-1/
+RUN --mount=type=cache,target=~/.cache/pypoetry \
+    cd ${HOME}/service-1 \
+    && poetry install

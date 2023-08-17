@@ -1,9 +1,5 @@
 version: '3'
 
 tasks:
-  hello:
-    desc: 'Hello World'
-    cmds:
-      - echo 'Hello World from Task!'
-    silent: true
+  noop: {}
 

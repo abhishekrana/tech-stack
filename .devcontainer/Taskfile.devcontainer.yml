@@ -25,8 +25,8 @@ tasks:
     cmds:
       - docker push {{.REGISTRY}}/{{.BASE_IMAGE_NAME}}:{{.BASE_IMAGE_TAG}}
 
-  build-tech-stack-1:
-    desc: Build tech-stack
+  build-tech-stack-test:
+    desc: Build tech-stack test
     cmds:
       - BASE_IMAGE_NAME={{.BASE_IMAGE_NAME}} BASE_IMAGE_TAG={{.BASE_IMAGE_TAG}}
         docker-compose build tech-stack

@@ -1,0 +1,52 @@
+version: '3'
+
+includes:
+  dc: ./Taskfile.devcontainer.yml
+
+env:
+  BUILD_CACHE: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+  DOCKER_BUILDKIT: 1
+
+vars:
+  BUILD_TYPE: "'{{if .BUILD_TYPE}}{{.BUILD_TYPE}}{{else}}dev-test{{end}}"
+  REGISTRY: docker.io
+  GIT_HASH:
+    sh: git log -1 --format=%h
+  GIT_TAG:
+    sh: git describe --tags --always
+
+tasks:
+  # Build ------------------------------------
+  build-service-1:
+    desc: Build Service 1
+    cmds:
+      - |
+        docker -l warn build \
+        {{- if not .BUILD_CACHE }}--no-cache \{{end}}
+        --build-arg BUILD_TYPE={{.BUILD_TYPE}} \
+        --build-arg GIT_HASH={{.GIT_HASH}} \
+        --build-arg GIT_TAG={{.GIT_TAG}} \
+        --target {{.BUILD_TYPE}} \
+        --tag {{.REGISTRY}}/service-1:latest \
+        --file Dockerfile .
+
+  run-service-1:
+    desc: Run Service 1
+    deps: [build-service-1]
+    cmds:
+      - |
+        docker run -it --rm \
+        service-1:latest
+
+  # Misc ------------------------------------
+  poetry-lock:
+    desc: Generate poetry.lock
+    deps: [build-service-1]
+    cmds:
+      - docker run --rm
+        -u $(id -u):$(id -g)
+        --workdir /workspace/service-1
+        -v ${PWD}:/workspace/service-1
+        {{.REGISTRY}}/service-1
+        bash -c "poetry lock"

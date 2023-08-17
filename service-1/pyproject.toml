@@ -1,0 +1,124 @@
+[tool.poetry]
+name = "service-1"
+version = "0.1.0"
+description = "Service 1"
+authors = ["Abhishek Rana <abhishekrana502@gmail.com>"]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+pydantic = "2.1.1"
+requests = "2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "23.7.0"
+mypy = "1.5.1"
+pytest = "7.4.0"
+requests-mock = "1.11.0"
+ruff = "0.0.284"
+types-requests = "2.31.0.2"
+
+[tool.black]
+line-length = 120
+
+[tool.mypy]
+files = ["src/app_1/**/*.py"]
+exclude = ["src/tests"]
+plugins = ["pydantic.mypy"]
+warn_unused_ignores = false
+pretty = true
+strict = true
+
+# https://github.com/charliermarsh/ruff
+# https://beta.ruff.rs/docs/rules/
+[tool.ruff]
+src = ["src"]
+select = [
+    "E", # pycodestyle
+    "F", # Pyflakes
+    # "C90", # mccabe
+    "I",   # isort
+    "N",   # pep8-naming
+    "D",   # pydocstyle
+    "UP",  # pyupgrade
+    "YTT", # flake8-2020
+    "ANN", # flake8-annotations
+    # "S", # flake8-bandit
+    # "BLE", # flake8-blind-except
+    # "FBT", # flake8-boolean-trap
+    "B", # flake8-bugbear
+    # "A", # flake8-builtins
+    "C4",  # flake8-comprehensions
+    "DTZ", # flake8-datetimez
+    "T10", # flake8-debugger
+    "EXE", # flake8-executable
+    "ISC", # flake8-implicit-str-concat
+    "INP", # flake8-no-pep420
+    "PIE", # flake8-pie
+    # "T20", # flake8-print
+    "PYI", # flake8-pyi
+    "PT",  # flake8-pytest-style
+    "Q",   # flake8-quotes
+    "RSE", # flake8-raise
+    "RET", # flake8-return
+    # "SIM", # flake8-simplify
+    "TID", # flake8-tidy-imports
+    # "TCH", # flake8-type-checking
+    "ARG", # flake8-unused-arguments
+    "PTH", # flake8-use-pathlib
+    # "ERA", # eradicate
+    # "PGH", # pygrep-hooks
+    "PL", # Pylint
+    # "TRY", # tryceratops
+    "RUF", # Ruff-specific rules
+    ## not selected
+    # "COM", # flake8-commas
+    # "DJ", # flake8-django
+    # "EM", # flake8-errmsg
+    # "ICN", # flake8-import-conventions
+    # "G", # flake8-logging-format
+    # "SLF", # flake8-self
+    # "PD", # pandas-vet
+    # "NPY", # NumPy-specific rules
+]
+ignore = [
+    "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+    "D100",   # Missing docstring in public module
+    "D101",   # Missing docstring in public class
+    "D102",   # Missing docstring in public method
+    "D103",   # Missing docstring in public functio
+    "D104",   # Missing docstring in public package
+    "D105",   # Missing docstring in magic method
+    "D106",   # Missing docstring in public nested class
+    "D107",   # Missing docstring in `__init__`
+    "B008",   # Do not perform function call
+    "RET504", # Unnecessary variable assignment before `return` statement
+]
+exclude = [
+    "__pypackages__",
+    ".git",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "**/__pycache__",
+    "node_modules",
+    "venv",
+]
+line-length = 120
+
+[tool.ruff.per-file-ignores]
+"src/app_1/cmd/*" = ["INP001"]
+"src/tests/*" = ["INP001"]
+
+[tool.ruff.isort]
+known-first-party = ["src"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.pytest.ini_options]
+testpaths = ["src/tests"]
+pythonpath = ["src"]

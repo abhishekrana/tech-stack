@@ -191,8 +191,8 @@
           "--no-warn-unused-ignores",
           "/workspace/app-1/src"
         ],
-        "python.testing.pytestArgs": ["-s", "-v", "--ignore=tmp", "/workspace/app-1/src"],
-        "python.venvFolders": ["../../workspace/app-1"]
+        "python.testing.pytestArgs": ["-s", "-v", "--ignore=tmp", "/workspace/service-1/src"],
+        "python.venvFolders": ["../../workspace/service-1"]
       },
       "extensions": [
         // General
