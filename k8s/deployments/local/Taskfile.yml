@@ -2,6 +2,7 @@ version: '3'
 
 vars:
   CLUSTER_NAME: tech-stack
+  POSTGRES_VERSION: 12.8.2 # app version: 15.4.0
 
 tasks:
   k3d-create:
@@ -17,7 +18,8 @@ tasks:
   install-postgresql:
     desc: Install postgresql
     cmds:
-      - helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql
+      - helm repo add bitnami https://charts.bitnami.com/bitnami
+      - helm install postgresql bitnami/postgresql --version {{.POSTGRES_VERSION}}
 
   uninstall-postgresql:
     desc: Uninstall postgresql
