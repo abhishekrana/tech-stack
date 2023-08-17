@@ -1,0 +1,14 @@
+# https://k3d.io/v5.5.2/usage/configfile/#all-options-example
+apiVersion: k3d.io/v1alpha5
+kind: Simple
+metadata:
+  name: tech-stack
+servers: 1
+agents: 2
+image: rancher/k3s:v1.27.4-k3s1
+# options:
+#   k3s:
+#     extraArgs:
+#       - arg: '--no-deploy=traefik'
+#         nodeFilters:
+#           - server:*

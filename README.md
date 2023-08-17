@@ -11,7 +11,7 @@
   - [x] [FastAPI](https://fastapi.tiangolo.com)
   - [x] [Pydantic V2](https://docs.pydantic.dev/latest)
   - [ ] [SQL Alchemy 2](https://docs.sqlalchemy.org/en/20)
-- [ ] [k3d](https://k3d.io)
+- [x] [k3d](https://k3d.io)
 - [ ] [Helm](https://helm.sh)
 - [ ] [Tilt](https://tilt.dev)
 - [ ] Postgres

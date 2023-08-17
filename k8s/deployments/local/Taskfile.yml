@@ -1,0 +1,15 @@
+version: '3'
+
+vars:
+  CLUSTER_NAME: tech-stack
+
+tasks:
+  k3d-create:
+    desc: Create k3d cluster
+    cmds:
+      - k3d cluster create tech-stack --config k3d-cluster.yml
+
+  k3d-delete:
+    desc: Delete k3d cluster
+    cmds:
+      - k3d cluster delete tech-stack
