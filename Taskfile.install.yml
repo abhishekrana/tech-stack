@@ -4,6 +4,7 @@ vars:
   K3D_VERSION: 5.5.2
   K9S_VERSION: 0.27.4
   KUBECTL_VERSION: 1.28.0
+  TILT_VERSION: 0.33.4
 
 tasks:
   k3d:
@@ -25,3 +26,9 @@ tasks:
       - curl -LO "https://dl.k8s.io/release/v{{.KUBECTL_VERSION}}/bin/linux/amd64/kubectl"
       - sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
       - echo 'source <(kubectl completion bash)' >>~/.bashrc
+
+  tilt:
+    dir: /tmp
+    cmds:
+      - curl -fsSL https://github.com/tilt-dev/tilt/releases/download/v{{.TILT_VERSION}}/tilt.{{.TILT_VERSION}}.linux.x86_64.tar.gz | tar -xzv tilt
+      - sudo mv tilt /usr/local/bin/tilt
