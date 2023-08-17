@@ -1,0 +1,97 @@
+version: '3'
+
+env:
+  COMPOSE_DOCKER_CLI_BUILD: 1
+  DOCKER_BUILDKIT: 1
+
+vars:
+  BASE_IMAGE_NAME: tech-stack-base
+  BASE_IMAGE_TAG: 0.1.0
+  COMPOSE_PROJECT_NAME:
+    sh: echo $(basename $(dirname `pwd`))-devcontainer
+  IMAGE_NAME: devcontainer-workflow
+  IMAGE_TAG: 0.1.0
+  REGISTRY: 'docker.io'
+
+tasks:
+  build-tech-stack-base:
+    desc: Build tech-stack base
+    cmds:
+      - BASE_IMAGE_NAME={{.BASE_IMAGE_NAME}} BASE_IMAGE_TAG={{.BASE_IMAGE_TAG}}
+        docker-compose build tech-stack-base
+
+  push-tech-stack-base:
+    desc: Push tech-stack base
+    cmds:
+      - docker push {{.REGISTRY}}/{{.BASE_IMAGE_NAME}}:{{.BASE_IMAGE_TAG}}
+
+  build-tech-stack-1:
+    desc: Build tech-stack
+    cmds:
+      - BASE_IMAGE_NAME={{.BASE_IMAGE_NAME}} BASE_IMAGE_TAG={{.BASE_IMAGE_TAG}}
+        docker-compose build tech-stack
+
+  build-tech-stack:
+    desc: Build tech-stack
+    env:
+      BUILD_CACHE: 1
+    vars:
+      USERNAME:
+        sh: whoami
+      USER_UID:
+        sh: id -u `whoami`
+    dir: ..
+    cmds:
+      - COMPOSE_PROJECT_NAME={{.COMPOSE_PROJECT_NAME}}
+        IMAGE_NAME={{.IMAGE_NAME}} IMAGE_TAG={{.IMAGE_TAG}}
+        USERNAME={{.USERNAME}} USER_UID={{.USER_UID}}
+        devcontainer build --log-level trace
+
+  start-tech-stack:
+    desc: Start tech-stack
+    env:
+      BUILD_CACHE: 1
+    vars:
+      USERNAME:
+        sh: whoami
+      USER_UID:
+        sh: id -u `whoami`
+    dir: ..
+    cmds:
+      - COMPOSE_PROJECT_NAME={{.COMPOSE_PROJECT_NAME}}
+        IMAGE_NAME={{.IMAGE_NAME}} IMAGE_TAG={{.IMAGE_TAG}}
+        USERNAME={{.USERNAME}} USER_UID={{.USER_UID}}
+        devcontainer open .
+
+  up-tech-stack:
+    desc: Up tech-stack
+    env:
+      BUILD_CACHE: 1
+    vars:
+      USERNAME:
+        sh: whoami
+      USER_UID:
+        sh: id -u `whoami`
+    dir: ..
+    cmds:
+      - COMPOSE_PROJECT_NAME={{.COMPOSE_PROJECT_NAME}}
+        IMAGE_NAME={{.IMAGE_NAME}} IMAGE_TAG={{.IMAGE_TAG}}
+        USERNAME={{.USERNAME}} USER_UID={{.USER_UID}}
+        devcontainer up --log-level trace
+
+  rm-tech-stack:
+    desc: Remove tech-stack
+    vars:
+      CONTAINER_ID:
+        sh: docker ps -a -q --filter="name={{.COMPOSE_PROJECT_NAME}}-{{.IMAGE_NAME}}-1"
+    cmds:
+      - |
+        {{ if .CONTAINER_ID }} docker stop {{.CONTAINER_ID}} && docker rm {{.CONTAINER_ID}} {{ end }}
+
+  reset-tech-stack:
+    desc: Reset tech-stack
+    cmds:
+      - task: build-tech-stack
+      - task: rm-tech-stack
+      - task: start-tech-stack
+

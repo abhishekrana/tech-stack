@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  tech-stack-base:
+    image: ${BASE_IMAGE_NAME:-tech-stack-base}:${BASE_IMAGE_TAG:-0.1.0}
+    build:
+      context: ..
+      dockerfile: .devcontainer/base.Dockerfile
+    profiles:
+      - donotstart
+
+  tech-stack:
+    image: ${IMAGE_NAME:-tech-stack}:${IMAGE_TAG:-0.1.0}
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+      args:
+        USERNAME: '${USERNAME:-vscode}'
+        USER_UID: '${USER_UID:-1000}'
+    volumes:
+      - ..:/workspace:cached # Mount the root folder that contains .git
+      - /etc/localtime:/etc/localtime:ro
+      - tech-stack-bashhistory:/commandhistory
+    command: sleep infinity
+
+volumes:
+  tech-stack-bashhistory:

@@ -1,0 +1,7 @@
+version: '3'
+
+includes:
+  dc: ./Taskfile.devcontainer.yml
+
+tasks:
+  noop: {}
