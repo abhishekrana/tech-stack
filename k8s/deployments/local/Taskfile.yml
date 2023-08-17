@@ -13,3 +13,20 @@ tasks:
     desc: Delete k3d cluster
     cmds:
       - k3d cluster delete tech-stack
+
+  install-postgresql:
+    desc: Install postgresql
+    cmds:
+      - helm install postgresql oci://registry-1.docker.io/bitnamicharts/postgresql
+
+  uninstall-postgresql:
+    desc: Uninstall postgresql
+    cmds:
+      - helm delete postgresql
+
+  purge-postgresql:
+    desc: Purge postgresql
+    cmds:
+      - cmd: task uninstall-postgresql
+        ignore_error: true
+      - kubectl delete pvc data-postgresql-0
