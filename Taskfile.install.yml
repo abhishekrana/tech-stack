@@ -1,24 +1,34 @@
 version: '3'
 
 vars:
+  HELM_VERSION: 3.12.3
   K3D_VERSION: 5.5.2
   K9S_VERSION: 0.27.4
   KUBECTL_VERSION: 1.28.0
   TILT_VERSION: 0.33.4
 
 tasks:
-  k3d:
+  helm:
+    dir: /tmp
     cmds:
-      - curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | TAG=v{{.K3D_VERSION}} bash
+      - curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+      - chmod 700 get_helm.sh
+      - ./get_helm.sh --version v{{.HELM_VERSION}}
+
+  k3d:
+    dir: /tmp
+    cmds:
+      - curl -s -o install_k3d.sh https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh
+      - chmod +x install_k3d.sh
+      - TAG=v{{.K3D_VERSION}} ./install_k3d.sh
 
   k9s:
     dir: /tmp
     cmds:
-      - |
-        rm -f k9s_Linux_amd64.tar.gz
-        wget https://github.com/derailed/k9s/releases/download/v{{.K9S_VERSION}}/k9s_Linux_amd64.tar.gz
-        tar -xzvf k9s_Linux_amd64.tar.gz
-        sudo mv k9s /usr/local/bin/
+      - rm -f k9s_Linux_amd64.tar.gz
+      - wget https://github.com/derailed/k9s/releases/download/v{{.K9S_VERSION}}/k9s_Linux_amd64.tar.gz
+      - tar -xzvf k9s_Linux_amd64.tar.gz
+      - sudo mv k9s /usr/local/bin/
 
   kubectl:
     dir: /tmp
