@@ -6,7 +6,8 @@
 
 # Stack
 
-- [x] FastAPI
+- [x] FastAPI (Python)
+- [x] Pydantic (Python)
 - [ ] K3d
 - [ ] Helm
 - [ ] Postgres
