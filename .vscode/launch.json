@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Python: FastAPI",
+      "type": "python",
+      "request": "launch",
+      "module": "uvicorn",
+      "cwd": "${workspaceFolder}/service-1/src",
+      "envFile": "${workspaceFolder}/.env",
+      "args": ["app_1.internal.main:app", "--port", "5000", "--reload"],
+      "jinja": true,
+      "justMyCode": true
+    }
+  ]
+}
