@@ -186,11 +186,7 @@
         "python.testing.pytestEnabled": true,
         // -- application specific settings --
         "python.analysis.extraPaths": ["/workspace/app-1/src"],
-        "python.linting.mypyArgs": [
-          "--strict",
-          "--no-warn-unused-ignores",
-          "/workspace/app-1/src"
-        ],
+        "python.linting.mypyArgs": ["--strict", "--no-warn-unused-ignores", "/workspace/app-1/src"],
         "python.testing.pytestArgs": ["-s", "-v", "--ignore=tmp", "/workspace/service-1/src"],
         "python.venvFolders": ["../../workspace/service-1"]
       },
@@ -234,7 +230,7 @@
         // Python
         "ms-python.black-formatter", // formatting support for python files using `black`
         "ms-python.debugpy@prerelease", // Python Debugger extension using `debugpy`
-        "ms-python.isort", // import sorting support for python files using `isort`
+        // "ms-python.isort", // import sorting support for python files using `isort`
         "ms-python.mypy-type-checker", // linting support for python files using `mypy`
         // "ms-python.pylint", // linting support for python files using `pylint`
         "ms-python.python", // python linting, debugging, code formatting, refactoring, unit tests

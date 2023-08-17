@@ -10,12 +10,15 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+fastapi = "0.101.1"
 pydantic = "2.1.1"
+pydantic-settings = "2.0.3"
 requests = "2.31.0"
+uvicorn = "0.23.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "23.7.0"
-mypy = "1.5.1"
+mypy = "1.5.0"
 pytest = "7.4.0"
 requests-mock = "1.11.0"
 ruff = "0.0.284"
@@ -86,6 +89,7 @@ select = [
 ]
 ignore = [
     "ANN401", # Dynamically typed expressions (typing.Any) are disallowed
+    "B008",   # Do not perform function call
     "D100",   # Missing docstring in public module
     "D101",   # Missing docstring in public class
     "D102",   # Missing docstring in public method
@@ -94,7 +98,7 @@ ignore = [
     "D105",   # Missing docstring in magic method
     "D106",   # Missing docstring in public nested class
     "D107",   # Missing docstring in `__init__`
-    "B008",   # Do not perform function call
+    "INP001", # Add an `__init__.py`
     "RET504", # Unnecessary variable assignment before `return` statement
 ]
 exclude = [

@@ -4,7 +4,7 @@ vars:
   PATH: .venv/bin:$PATH
 
 tasks:
-  # application ------------------------------------
+  # Application ------------------------------------
   run-app-1:
     desc: Run App 1
     cmds:
@@ -18,4 +18,4 @@ tasks:
     cmds:
       - export PATH={{.PATH}} && echo "Black..." && python3 -m black src
       - export PATH={{.PATH}} && echo "Ruff..." && python3 -m ruff check src
-      - export PATH={{.PATH}} && echo "Mypy..." && python3 -m mypy srca
+      - export PATH={{.PATH}} && echo "Mypy..." && python3 -m mypy src

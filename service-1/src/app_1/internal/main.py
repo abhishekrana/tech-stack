@@ -1,11 +1,24 @@
 import logging
 
-from app_1.internal.helpers.utils import util_1
+import uvicorn
+from fastapi import FastAPI
+
+from app_1.internal.configs.app_1 import App1Config, load_app_1_config
+from app_1.internal.handlers import health
 
 logging.basicConfig(level=logging.INFO)
 
-logging.info("Hello World app 1")
+app: FastAPI = FastAPI()
 
-print("Hello World app 1")
+app.include_router(health.router, tags=["Health"])
 
-util_1()
+if __name__ == "__main__":
+    config: App1Config = load_app_1_config()
+    print(f"{config=}")
+
+    uvicorn.run(
+        "main:app",
+        host=config.host,
+        port=config.port,
+        reload=config.reload,
+    )
