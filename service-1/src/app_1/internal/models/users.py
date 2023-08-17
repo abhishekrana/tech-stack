@@ -16,7 +16,9 @@ class UserDB(Base):
     id: Mapped[UUID] = mapped_column(primary_key=True, init=False)
     name: Mapped[str]
     fullname: Mapped[str | None]
-    created_at: Mapped[datetime] = mapped_column(init=False, server_default=func.now(), default=func.now())
+    created_at: Mapped[datetime] = mapped_column(
+        init=False, server_default=func.now(), default=func.now()
+    )  # TODO: server_default not working
     updated_at: Mapped[datetime] = mapped_column(
         init=False, server_default=func.now(), default=func.now(), onupdate=func.now()
     )

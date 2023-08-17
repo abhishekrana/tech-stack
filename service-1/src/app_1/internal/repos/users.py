@@ -17,16 +17,8 @@ class UserRepo:
 
     def find(self: Self) -> list[UserDB]:
         try:
-            # stmt = select(UserDB.name)
-            # items: list[UserDB] = self.session.execute(stmt)
-            # return items
             stmt = select(UserDB).where(UserDB.deleted_at.is_(None))
-            items: list[UserDB] = self.session.scalars(stmt)
-            # items: list[UserDB] = (
-            #     self.session.select(UserDB)
-            #     .where(UserDB.deleted_at == None)
-            #     .all()  # pylint: disable=singleton-comparison
-            # )
+            items: list[UserDB] = self.session.scalars(stmt)  # type: ignore
             return items
 
         except Exception as e:
@@ -43,7 +35,7 @@ class UserRepo:
                 self.session.refresh(item)
 
         except DBAPIError as e:
-            if AppErrorType.ERROR_UNIQUE_CONSTRAINT.value in e.orig.args[0].get("M"):
+            if e.orig is not None and AppErrorType.ERROR_UNIQUE_CONSTRAINT.value in e.orig.args[0].get("M"):
                 raise AppError(
                     AppErrorType.ERROR_UNIQUE_CONSTRAINT,
                     detail="" if len(e.orig.args) == 0 else e.orig.args[0].get("D"),

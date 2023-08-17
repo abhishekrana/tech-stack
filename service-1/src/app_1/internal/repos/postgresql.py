@@ -18,7 +18,7 @@ def get_engine(
     return create_engine(url, echo=config.echo)
 
 
-session_factory: sessionmaker = sessionmaker(
+session_factory: sessionmaker = sessionmaker(  # type: ignore
     bind=get_engine(load_postgresql_config()), autoflush=True, autocommit=False
 )
 
