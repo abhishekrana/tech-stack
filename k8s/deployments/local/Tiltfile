@@ -27,11 +27,11 @@ docker_build(
 k8s_yaml(helm("../../charts/tech-stack", name="tech-stack", values="values.yaml"))
 
 # Resource
-k8s_resource(
-    workload="service-1",
-    labels=["Backend"],
-    port_forwards=port_forward(local_port=5000, container_port=5000, name="Swagger", link_path="/docs"),
-    # resource_deps=[
-    #     "migrations"
-    # ],
-)
+# k8s_resource(
+#     workload="service-1",
+#     labels=["Backend"],
+#     port_forwards=port_forward(local_port=5000, container_port=5000, name="Swagger", link_path="/docs"),
+#     # resource_deps=[
+#     #     "migrations"
+#     # ],
+# )
