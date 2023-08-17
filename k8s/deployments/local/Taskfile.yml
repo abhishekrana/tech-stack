@@ -3,6 +3,7 @@ version: '3'
 vars:
   CLUSTER_NAME: tech-stack
   POSTGRES_VERSION: 12.8.2 # app version: 15.4.0
+  REDIS_VERSION: 17.15.4 # app version: 7.2.0
 
 tasks:
   k3d-create:
@@ -15,6 +16,7 @@ tasks:
     cmds:
       - k3d cluster delete tech-stack
 
+  # https://artifacthub.io/packages/helm/bitnami/postgresql
   install-postgresql:
     desc: Install postgresql
     cmds:
@@ -32,3 +34,38 @@ tasks:
       - cmd: task uninstall-postgresql
         ignore_error: true
       - kubectl delete pvc data-postgresql-0
+
+  # https://artifacthub.io/packages/helm/bitnami/redis
+  install-redis:
+    desc: Install redis
+    cmds:
+      - helm repo add bitnami https://charts.bitnami.com/bitnami
+      - helm install redis bitnami/redis --version {{.REDIS_VERSION}}
+
+  uninstall-redis:
+    desc: Uninstall redis
+    cmds:
+      - helm delete redis
+
+  purge-redis:
+    desc: Purge redis
+    cmds:
+      - cmd: task uninstall-redis
+        ignore_error: true
+      - kubectl delete pvc data-redis-master-0
+      - kubectl delete pvc data-redis-replicas-0
+      - kubectl delete pvc data-redis-replicas-1
+
+  install-dependencies:
+    desc: Install dependencies
+    cmds:
+      - task: install-postgresql
+      - task: install-redis
+
+  uninstall-dependencies:
+    desc: Uninstall dependencies
+    cmds:
+      - cmd: task uninstall-postgresql
+        ignore_error: true
+      - cmd: task uninstall-redis
+        ignore_error: true
