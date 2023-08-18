@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime, timezone
 from uuid import UUID
 
 import pymongo
@@ -14,6 +15,9 @@ class ProductDB(Document):
     description: str | None = None
     # description: Indexed(str, index_type=pymongo.TEXT)
     price: Indexed(float, index_type=pymongo.DESCENDING)  # pyright: ignore
+    created_at: datetime = datetime.now(tz=timezone.utc)
+    updated_at: datetime = datetime.now(tz=timezone.utc)
+    deleted_at: datetime | None
 
     class Settings:
         name: str = "products"  # collection/database name
@@ -48,6 +52,8 @@ class ProductCreateResponse(BaseModel):
     name: str
     description: str
     price: float
+    created_at: datetime
+    updated_at: datetime
 
     model_config = ConfigDict(
         from_attributes=True,
@@ -59,6 +65,8 @@ class ProductFindResponse(BaseModel):
     name: str
     description: str
     price: float
+    created_at: datetime
+    updated_at: datetime
 
     model_config = ConfigDict(
         from_attributes=True,

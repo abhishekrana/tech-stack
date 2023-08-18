@@ -34,7 +34,7 @@ tasks:
     cmds:
       - cmd: task uninstall-mongodb
         ignore_error: true
-      - kubectl delete pvc mongodb-data-mongodb-master-0
+      - kubectl delete pvc mongodb
 
   # https://artifacthub.io/packages/helm/bitnami/postgresql
   install-postgresql:

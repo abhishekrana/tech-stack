@@ -2,6 +2,16 @@
 
 ```
 ./bootstrap.sh
+
+./setup.sh
+
+# Run migrations
+
+# Port forward postgresql
+# Port forward mongodb
+
+cd service-1
+task dc:run-app-1
 ```
 
 ## Roadmap

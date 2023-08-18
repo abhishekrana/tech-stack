@@ -14,6 +14,4 @@ cd k8s/deployments/local
 task delete-k3d
 task create-k3d
 task install-postgresql
-
-# Run migrations
-# Port forward postgresql
+task install-mongodb
