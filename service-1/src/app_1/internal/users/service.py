@@ -1,4 +1,3 @@
-from dataclasses import asdict
 from typing import Self
 
 from app_1.internal.models.users import UserCreateRequest, UserCreateResponse, UserDB, UserFindResponse
@@ -11,7 +10,7 @@ class UserService:
 
     def find(self: Self) -> list[UserFindResponse]:
         user_db: list[UserDB] = self.repo.find()
-        user: list[UserFindResponse] = [UserFindResponse.model_validate(asdict(x)) for x in user_db]
+        user: list[UserFindResponse] = [UserFindResponse.model_validate(x) for x in user_db]
         return user
 
     def create(self: Self, body: list[UserCreateRequest]) -> list[UserCreateResponse]:
@@ -24,5 +23,5 @@ class UserService:
                 )
             )
         user_db: list[UserDB] = self.repo.create(items)
-        user: list[UserCreateResponse] = [UserCreateResponse.model_validate(asdict(x)) for x in user_db]
+        user: list[UserCreateResponse] = [UserCreateResponse.model_validate(x) for x in user_db]
         return user

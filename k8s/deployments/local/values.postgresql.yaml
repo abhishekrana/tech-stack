@@ -6,4 +6,4 @@ global:
       postgresPassword: 'adminAdmin123!'
       username: 'admin'
       password: 'adminAdmin123!'
-      database: 'tech_stack'
+      database: 'tech_stack_db'

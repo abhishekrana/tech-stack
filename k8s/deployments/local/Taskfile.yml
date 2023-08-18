@@ -6,12 +6,12 @@ vars:
   REDIS_VERSION: 17.15.4 # app version: 7.2.0
 
 tasks:
-  k3d-create:
+  create-k3d:
     desc: Create k3d cluster
     cmds:
       - k3d cluster create tech-stack --config k3d-cluster.yml
 
-  k3d-delete:
+  delete-k3d:
     desc: Delete k3d cluster
     cmds:
       - k3d cluster delete tech-stack

@@ -3,8 +3,10 @@ from typing import Self
 
 from fastapi import status
 from sqlalchemy import select
+from sqlalchemy.engine.result import ScalarResult
 from sqlalchemy.exc import DBAPIError
 from sqlalchemy.orm.session import Session
+from sqlalchemy.sql.selectable import Select
 
 from app_1.internal.helpers.app_errors import AppError, AppErrorType
 from app_1.internal.helpers.utils import get_uuid
@@ -17,9 +19,9 @@ class UserRepo:
 
     def find(self: Self) -> list[UserDB]:
         try:
-            stmt = select(UserDB).where(UserDB.deleted_at.is_(None))
-            items: list[UserDB] = self.session.scalars(stmt)  # type: ignore
-            return items
+            statement: Select[tuple[UserDB]] = select(UserDB).where(UserDB.deleted_at.is_(None))
+            items: ScalarResult[UserDB] = self.session.execute(statement).scalars()
+            return list(items)
 
         except Exception as e:
             logging.error(f"{e=!r}")
@@ -28,7 +30,7 @@ class UserRepo:
     def create(self: Self, items: list[UserDB]) -> list[UserDB]:
         try:
             for item in items:
-                if item.id is None:
+                if item.id is None:  # pyright: ignore
                     item.id = get_uuid()
                 self.session.add(item)
                 self.session.commit()
@@ -44,8 +46,8 @@ class UserRepo:
             logging.error(f"{e=!r}")
             raise e
 
-        except Exception as exc:
-            logging.error(f"Exception: {exc}")
-            raise exc
+        except Exception as e:
+            logging.error(f"{e=!r}")
+            raise e
 
         return items
