@@ -15,7 +15,7 @@
 - [ ] [Helm](https://helm.sh)
 - [ ] [Tilt](https://tilt.dev)
 - [x] Postgresql
-- [ ] MongoDB
+- [x] MongoDB
 - [ ] Redis
 - [ ] Rabbitmq
 - [ ] Github Actions

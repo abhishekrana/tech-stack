@@ -1,0 +1,8 @@
+# https://raw.githubusercontent.com/bitnami/charts/main/bitnami/mongodb/values.yaml
+
+auth:
+  rootUser: 'admin'
+  rootPassword: 'adminAdmin123!'
+  usernames: ['admin']
+  passwords: ['adminAdmin123!']
+  databases: ['tech_stack_db']
