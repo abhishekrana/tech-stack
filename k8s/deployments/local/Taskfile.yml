@@ -38,7 +38,8 @@ tasks:
     cmds:
       - cmd: task uninstall-elasticsearch
         ignore_error: true
-      - helm delete --purge elasticsearch
+      - cmd: helm delete --purge elasticsearch
+        ignore_error: true
       # - kubectl delete pvc elasticsearch # TODO
 
   # https://artifacthub.io/packages/helm/bitnami/kibana

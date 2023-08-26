@@ -2,3 +2,17 @@
 
 # global:
 #   kibanaEnabled: true
+
+master:
+  masterOnly: true
+  replicaCount: 1
+
+data:
+  replicaCount: 1
+
+coordinating:
+  replicaCount: 1
+
+ingest:
+  enabled: true
+  replicaCount: 1
