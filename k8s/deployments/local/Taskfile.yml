@@ -2,8 +2,12 @@ version: '3'
 
 vars:
   CLUSTER_NAME: tech-stack
+  ELASTICSEARCH_VERSION: 19.11.0 # app version: 8.9.1
+  KIBANA_VERSION: 10.5.0 # app version: 8.9.1
+  LOGSTASH_VERSION: 5.5.0 # app version: 8.9.1
   MONGODB_VERSION: 13.16.4 # app version: 6.0.8
   POSTGRESQL_VERSION: 12.8.2 # app version: 15.4.0
+  PROMETHEUS_VERSION: 0.2.0 # app version: 2.46.0
   REDIS_VERSION: 17.15.4 # app version: 7.2.0
 
 tasks:
@@ -16,6 +20,64 @@ tasks:
     desc: Delete k3d cluster
     cmds:
       - k3d cluster delete tech-stack
+
+  # https://artifacthub.io/packages/helm/bitnami/elasticsearch
+  install-elasticsearch:
+    desc: Install elasticsearch
+    cmds:
+      - helm repo add bitnami https://charts.bitnami.com/bitnami
+      - helm install elasticsearch bitnami/elasticsearch --version {{.ELASTICSEARCH_VERSION}} --values values.elasticsearch.yaml
+
+  uninstall-elasticsearch:
+    desc: Uninstall elasticsearch
+    cmds:
+      - helm delete elasticsearch
+
+  purge-elasticsearch:
+    desc: Purge elasticsearch
+    cmds:
+      - cmd: task uninstall-elasticsearch
+        ignore_error: true
+      - helm delete --purge elasticsearch
+      # - kubectl delete pvc elasticsearch # TODO
+
+  # https://artifacthub.io/packages/helm/bitnami/kibana
+  install-kibana:
+    desc: Install kibana
+    cmds:
+      - helm repo add bitnami https://charts.bitnami.com/bitnami
+      - helm install kibana bitnami/kibana --version {{.KIBANA_VERSION}} --values values.kibana.yaml
+
+  uninstall-kibana:
+    desc: Uninstall kibana
+    cmds:
+      - helm delete kibana
+
+  purge-kibana:
+    desc: Purge kibana
+    cmds:
+      - cmd: task uninstall-kibana
+        ignore_error: true
+      # - kubectl delete pvc kibana # TODO
+
+  # https://artifacthub.io/packages/helm/bitnami/logstash
+  install-logstash:
+    desc: Install logstash
+    cmds:
+      - helm repo add bitnami https://charts.bitnami.com/bitnami
+      - helm install logstash bitnami/logstash --version {{.LOGSTASH_VERSION}} --values values.logstash.yaml
+
+  uninstall-logstash:
+    desc: Uninstall logstash
+    cmds:
+      - helm delete logstash
+
+  purge-logstash:
+    desc: Purge logstash
+    cmds:
+      - cmd: task uninstall-logstash
+        ignore_error: true
+      # - kubectl delete pvc logstash # TODO
 
   # https://artifacthub.io/packages/helm/bitnami/mongodb
   install-mongodb:
@@ -54,6 +116,25 @@ tasks:
       - cmd: task uninstall-postgresql
         ignore_error: true
       - kubectl delete pvc data-postgresql-0
+
+  # https://artifacthub.io/packages/helm/bitnami/prometheus
+  install-prometheus:
+    desc: Install prometheus
+    cmds:
+      - helm repo add bitnami https://charts.bitnami.com/bitnami
+      - helm install prometheus bitnami/prometheus --version {{.PROMETHEUS_VERSION}} --values values.prometheus.yaml
+
+  uninstall-prometheus:
+    desc: Uninstall prometheus
+    cmds:
+      - helm delete prometheus
+
+  purge-prometheus:
+    desc: Purge prometheus
+    cmds:
+      - cmd: task uninstall-prometheus
+        ignore_error: true
+      # - kubectl delete pvc data-prometheus-0 # TODO
 
   # https://artifacthub.io/packages/helm/bitnami/redis
   install-redis:

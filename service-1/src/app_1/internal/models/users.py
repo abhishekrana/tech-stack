@@ -7,7 +7,7 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, MappedAsDataclass, mapped_co
 
 
 # Database model
-class Base(MappedAsDataclass, DeclarativeBase):
+class Base(DeclarativeBase, MappedAsDataclass):
     pass
 
 

@@ -38,7 +38,7 @@
           "editor.formatOnSave": true
         },
         "[sql]": {
-          "editor.defaultFormatter": "cweijan.vscode-postgresql-client2"
+          "editor.defaultFormatter": "mtxr.sqltools"
         },
         "[shellscript]": {
           "editor.defaultFormatter": "foxundermoon.shell-format",
@@ -192,50 +192,53 @@
       },
       "extensions": [
         // General
-        "42crunch.vscode-openapi", // support for the OpenAPI Specification (OAS) in JSON or YAML format, SwaggerUI and ReDoc preview, IntelliSense, linting, schema enforcement, and more
-        "cweijan.vscode-postgresql-client2", // database client to explore and modify database. Run queries direcly from .sql files
-        "eamodio.gitlens", // visualize code authorship via code lens, navigate and explore git repositories
-        "esbenp.prettier-vscode", // code formatter for JavaScript, TypeScript, Flow, JSX, JSON, CSS, SCSS, HTML, Vue, Angular, GraphQL, Markdown, YAML
-        "formulahendry.code-runner", // run code snippet or code file for multiple languages
-        "foxundermoon.shell-format", // code formatter for shellscript (.bash, .sh)
-        "github.vscode-github-actions", // gitHub Actions workflows and runs for github.com hosted repositories in VS Code
-        "GitHub.vscode-pull-request-github", // review and manage github pull requests and issues
-        "IBM.output-colorizer", // syntax highlighting for logs
-        "mikestead.dotenv", // syntax highlighting support for environment (.env) files
-        "ms-azuretools.vscode-docker", // create, manage, and debug containerized applications
-        "ms-kubernetes-tools.vscode-kubernetes-tools", // syntax highlighting for YAML + Helm Templates, autocomplete for Helm
-        "ms-vscode-remote.vscode-remote-extensionpack", // open any folder in a container, on a remote machine, or in WSL and take advantage of VS Code's full feature set.
-        "quicktype.quicktype", // Copy JSON, paste as Python, Go, TypeScript, C#, C++ and more.
-        "rangav.vscode-thunder-client", // REST API client with support for import/export collections from/to Postman
-        "redhat.vscode-yaml", // kubernetes syntax support
-        "richie5um2.vscode-sort-json", // alphabetically sorts the keys in selected JSON objects
-        "smulyono.reveal", // reveal open files into sidebar
-        "tamasfe.even-better-toml", // fully-featured TOML support
-        "usernamehw.errorlens", // display errors, warnings and other language diagnostics inline
-        "visualstudioexptteam.intellicode-api-usage-examples", // see relevant code examples APIs right in your editor
-        "VisualStudioExptTeam.vscodeintellicode", // AI-assisted development features/suggestions for Python, TypeScript/JavaScript
+        "42crunch.vscode-openapi",
+        "eamodio.gitlens",
+        "esbenp.prettier-vscode",
+        "formulahendry.code-runner",
+        "foxundermoon.shell-format",
+        "GitHub.vscode-pull-request-github",
+        "IBM.output-colorizer",
+        "mikestead.dotenv",
+        "ms-azuretools.vscode-docker",
+        "ms-kubernetes-tools.vscode-kubernetes-tools",
+        "ms-vscode-remote.vscode-remote-extensionpack",
+        "quicktype.quicktype",
+        "rangav.vscode-thunder-client",
+        "redhat.vscode-yaml",
+        "richie5um2.vscode-sort-json",
+        "smulyono.reveal",
+        "tamasfe.even-better-toml",
+        "usernamehw.errorlens",
+        "visualstudioexptteam.intellicode-api-usage-examples",
+        "VisualStudioExptTeam.vscodeintellicode",
+        // Databases
+        "mongodb.mongodb-vscode",
+        "mtxr.sqltools",
+        "mtxr.sqltools-driver-pg",
+        "dunn.redis",
         // Vue.js
-        "antfu.vite", // support vite
-        "dbaeumer.vscode-eslint", // integrates ESLint
-        "esbenp.prettier-vscode", // code formatter for JavaScript, TypeScript, Flow, JSX, JSON, CSS, SCSS, HTML, Vue, Angular, GraphQL, Markdown, YAML
-        "ms-playwright.playwright", // Run Playwright Test tests in Visual Studio Code
-        "sdras.vue-vscode-snippets", // snippets that will supercharge your Vue workflow
-        "stylelint.vscode-stylelint", // stylelint extension
-        "vue.volar", // Vue Language Features is a language support extension built for Vue
-        "Vue.vscode-typescript-vue-plugin", // Vue Plugin for TypeScript server. Get type support for *.vue imports in TS files.
-        "zixuanchen.vitest-explorer", // Vitest case runner
+        "antfu.vite",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-playwright.playwright",
+        "sdras.vue-vscode-snippets",
+        "stylelint.vscode-stylelint",
+        "vue.volar",
+        "Vue.vscode-typescript-vue-plugin",
+        "zixuanchen.vitest-explorer",
         // GoLang
-        "golang.go", // go language support
-        "aleksandra.go-group-imports", // separate imports in go files into three groups: stdlib, 3rdparty, own on file save
+        "golang.go",
+        "aleksandra.go-group-imports",
         // Python
-        "ms-python.black-formatter", // formatting support for python files using `black`
-        "ms-python.debugpy@prerelease", // Python Debugger extension using `debugpy`
-        // "ms-python.isort", // import sorting support for python files using `isort`
-        "ms-python.mypy-type-checker", // linting support for python files using `mypy`
-        // "ms-python.pylint", // linting support for python files using `pylint`
-        "ms-python.python", // python linting, debugging, code formatting, refactoring, unit tests
-        "ms-python.vscode-pylance", // language server for Python for IntelliSense support and static type checking
-        "charliermarsh.ruff" // support for the Ruff linter
+        "ms-python.black-formatter",
+        "ms-python.debugpy@prerelease",
+        // "ms-python.isort",
+        "ms-python.mypy-type-checker",
+        // "ms-python.pylint",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "charliermarsh.ruff"
       ]
     }
   }
