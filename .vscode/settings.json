@@ -1,0 +1,23 @@
+{
+  "python.analysis.typeCheckingMode": "basic",
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "server": "localhost",
+      "port": 5432,
+      "driver": "PostgreSQL",
+      "name": "tech_stack_db",
+      "database": "tech_stack_db",
+      "username": "admin",
+      "password": "adminAdmin123!"
+    }
+  ]
+  //   "[python]": {
+  //     "editor.formatOnSave": true,
+  //     "editor.codeActionsOnSave": {
+  //       //   "source.fixAll": true
+  //       "source.organizeImports": true
+  //     }
+  //   },
+  //   "python.formatting.provider": "black"
+}

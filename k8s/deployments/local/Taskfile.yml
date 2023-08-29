@@ -99,6 +99,12 @@ tasks:
         ignore_error: true
       - kubectl delete pvc mongodb
 
+  port-forward-mongodb:
+    desc: Port forward mongodb
+    cmds:
+      - lsof -t -i:27017 | xargs -r kill -9
+      - kubectl port-forward deployment/mongodb 27017:27017
+
   # https://artifacthub.io/packages/helm/bitnami/postgresql
   install-postgresql:
     desc: Install postgresql
@@ -117,6 +123,12 @@ tasks:
       - cmd: task uninstall-postgresql
         ignore_error: true
       - kubectl delete pvc data-postgresql-0
+
+  port-forward-postgresql:
+    desc: Port forward postgresql
+    cmds:
+      - lsof -t -i:5432 | xargs -r kill -9
+      - kubectl port-forward postgresql-0 5432:5432
 
   # https://artifacthub.io/packages/helm/bitnami/prometheus
   install-prometheus:
@@ -156,16 +168,30 @@ tasks:
         ignore_error: true
       - kubectl delete pvc redis-data-redis-master-0
 
+  port-forward-redis:
+    desc: Port forward redis
+    cmds:
+      - lsof -t -i:6379 | xargs -r kill -9
+      - kubectl port-forward redis-master-0 6379:6379
+
   install-dependencies:
     desc: Install dependencies
     cmds:
+      - task: install-mongodb
       - task: install-postgresql
       - task: install-redis
 
   uninstall-dependencies:
     desc: Uninstall dependencies
     cmds:
+      - cmd: task uninstall-mongodb
+        ignore_error: true
       - cmd: task uninstall-postgresql
         ignore_error: true
       - cmd: task uninstall-redis
         ignore_error: true
+
+  generate-charts:
+    desc: Generate charts
+    cmds:
+      - helm template tech-stack ../../../k8s/charts/tech-stack --include-crds --values values.yaml

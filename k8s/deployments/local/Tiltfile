@@ -24,7 +24,7 @@ docker_build(
 )
 
 # Helm
-k8s_yaml(helm("../../charts/tech-stack", name="tech-stack", values="values.yaml"))
+k8s_yaml(helm("../../charts/tech-stack", name="tech-stack", values=["values.yaml"]))
 
 # Resource
 # k8s_resource(

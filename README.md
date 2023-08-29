@@ -17,6 +17,8 @@ task dc:run-app-1
 ## Roadmap
 
 - [x] [Devcontainers](https://code.visualstudio.com/docs/devcontainers/containers)
+  - [x] WSL2 (Windows)
+  - [ ] Linux
 - [x] Python
   - [x] [FastAPI](https://fastapi.tiangolo.com)
   - [x] [Pydantic V2](https://docs.pydantic.dev/latest)

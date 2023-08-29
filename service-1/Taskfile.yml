@@ -36,7 +36,7 @@ tasks:
     deps: [build-service-1]
     cmds:
       - |
-        docker run -it --rm \
+        docker run -it --rm --network="host" \
         service-1:latest
 
   # Misc ------------------------------------
