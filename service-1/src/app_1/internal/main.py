@@ -23,6 +23,7 @@ app.include_router(products.router, tags=["Products"])
 
 if __name__ == "__main__":
     config: App1Config = load_app_1_config()
+    logging.info(f"{config=}")
     print(f"{config=}")
 
     uvicorn.run(  # pyright: ignore

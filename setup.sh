@@ -18,5 +18,6 @@ popd
 pushd k8s/deployments/local
 task delete-k3d
 task create-k3d
-task install-dependencies
+# task install-dependencies
+task install-postgresql
 popd
