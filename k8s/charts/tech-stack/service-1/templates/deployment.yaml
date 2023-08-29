@@ -48,9 +48,9 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: MONGODB_HOST
+            - name: MONGODB_SVC_HOST
               value: mongodb
-            - name: POSTGRESQL_HOST
+            - name: POSTGRESQL_SVC_HOST
               value: postgresql
       {{- with .Values.nodeSelector }}
       nodeSelector:

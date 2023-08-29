@@ -10,7 +10,7 @@ ci_settings(
     timeout="30m",
 )
 docker_prune_settings(disable=False, max_age_mins=360, num_builds=0, interval_hrs=24, keep_recent=10)
-update_settings(max_parallel_updates=3, k8s_upsert_timeout_secs=30, suppress_unused_image_warnings=None)
+update_settings(max_parallel_updates=1, k8s_upsert_timeout_secs=30, suppress_unused_image_warnings=None)
 version_settings(check_updates=False)
 
 # Build
