@@ -15,7 +15,8 @@ version_settings(check_updates=False)
 
 # Build
 docker_build(
-    ref="docker.io/service-1",
+    # ref="docker.io/service-1",
+    ref="registry.localhost:32000/service-1",
     context="../../../service-1",
     build_args={"BUILD_TYPE": "dev-test"},
     dockerfile="../../../service-1/Dockerfile",

@@ -9,8 +9,14 @@ task install:k9s
 task install:kubectl
 task install:tilt
 
+# Generate helm charts
+pushd k8s/charts/tech-stack
+task update-dependency
+popd
+
 # Create k8s cluster
-cd k8s/deployments/local
+pushd k8s/deployments/local
 task delete-k3d
 task create-k3d
 task install-dependencies
+popd

@@ -11,3 +11,8 @@ https://github.com/fastapi-users/fastapi-users/blob/master/fastapi_users/schemas
 Defining a document
 The Document class in Beanie is responsible for mapping and handling the data from the collection.
 It is inherited from the BaseModel Pydantic class, so it follows the same data typing and parsing behavior.
+
+
+k3d registry list
+NAME                 ROLE       CLUSTER      STATUS
+registry.localhost   registry   tech-stack   running

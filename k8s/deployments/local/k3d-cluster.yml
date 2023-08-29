@@ -6,6 +6,11 @@ metadata:
 servers: 1
 agents: 2
 image: rancher/k3s:v1.27.4-k3s1
+registries:
+  create:
+    name: registry.localhost
+    host: '0.0.0.0'
+    hostPort: '32000'
 # options:
 #   k3s:
 #     extraArgs:

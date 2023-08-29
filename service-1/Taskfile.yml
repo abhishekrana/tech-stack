@@ -10,7 +10,8 @@ env:
 
 vars:
   BUILD_TYPE: "'{{if .BUILD_TYPE}}{{.BUILD_TYPE}}{{else}}dev-test{{end}}"
-  REGISTRY: docker.io
+  # REGISTRY: docker.io
+  REGISTRY: 'registry.localhost'
   GIT_HASH:
     sh: git log -1 --format=%h
   GIT_TAG:

@@ -1,0 +1,11 @@
+service-1:
+  image:
+    repository: registry.localhost:32000/service-1
+    tag: latest
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi

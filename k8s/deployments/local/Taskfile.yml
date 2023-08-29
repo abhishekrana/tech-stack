@@ -194,5 +194,5 @@ tasks:
   generate-charts:
     desc: Generate charts
     cmds:
-      - cd ../../../k8s/charts/tech-stack && task dependency-update
+      - cd ../../../k8s/charts/tech-stack && task update-dependency
       - helm template tech-stack ../../../k8s/charts/tech-stack --include-crds --values values.yaml > /tmp/output.yaml
