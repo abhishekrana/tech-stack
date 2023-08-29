@@ -1,12 +1,13 @@
-# Default values for tech-stack.
+# Default values for service-1.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  # repository: nginx
-  pullPolicy: IfNotPresent
+  repository: service-1
+  # pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: ''
 
@@ -40,7 +41,8 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  # port: 80
+  port: 5000
 
 ingress:
   enabled: false

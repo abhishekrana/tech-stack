@@ -1,0 +1,7 @@
+version: '3'
+
+tasks:
+  dependency-update:
+    desc: create-k3d
+    cmds:
+      - helm dependency update
