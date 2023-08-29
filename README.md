@@ -5,13 +5,10 @@
 
 ./setup.sh
 
-# Run migrations
+# TODO: Run migrations
 
-# Port forward postgresql
-# Port forward mongodb
-
-cd service-1
-task dc:run-app-1
+cd k8s/deployments/local
+tilt up
 ```
 
 ## Roadmap
@@ -24,8 +21,8 @@ task dc:run-app-1
   - [x] [Pydantic V2](https://docs.pydantic.dev/latest)
   - [x] [SQL Alchemy 2](https://docs.sqlalchemy.org/en/20)
 - [x] [k3d](https://k3d.io)
-- [ ] [Helm](https://helm.sh)
-- [ ] [Tilt](https://tilt.dev)
+- [x] [Helm](https://helm.sh)
+- [x] [Tilt](https://tilt.dev)
 - [x] Postgresql
 - [x] MongoDB
 - [ ] Redis
@@ -34,6 +31,9 @@ task dc:run-app-1
 - [ ] Golang
 - [ ] Vue.js
 
+## Deployment
+![K3D deployment](assets/k3d_deployment.jpg 'K3D Deployment')
+
 ## Service-1
 
-![Servie-1: Swagger](assets/service-1_swagger.png 'Service-1: Swagger')
+![Service-1: Swagger](assets/service-1_swagger.png 'Service-1: Swagger')

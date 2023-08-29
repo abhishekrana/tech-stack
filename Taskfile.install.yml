@@ -29,6 +29,7 @@ tasks:
       - wget https://github.com/derailed/k9s/releases/download/v{{.K9S_VERSION}}/k9s_Linux_amd64.tar.gz
       - tar -xzvf k9s_Linux_amd64.tar.gz
       - sudo mv k9s /usr/local/bin/
+      - sudo wget -O ~/.config/k9s/skin.yml https://raw.githubusercontent.com/derailed/k9s/master/skins/solarized_light.yml
 
   kubectl:
     dir: /tmp
