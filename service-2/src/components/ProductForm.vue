@@ -1,9 +1,13 @@
 <script lang="ts">
+import type { Product } from '@/models/Product'
+import { useProductStore } from '@/stores/ProductStore'
 import type { Ref } from 'vue'
 import { defineComponent, ref } from 'vue'
 
 export default defineComponent({
   setup() {
+    const productStore = useProductStore()
+
     const newProductName: Ref<string> = ref('')
     const newProductDescription: Ref<string> = ref('')
     const newProductPrice: Ref<string> = ref('')
@@ -14,10 +18,18 @@ export default defineComponent({
         newProductDescription.value.length > 0 &&
         newProductPrice.value.length > 0
       ) {
-        console.log(`Submitted ${newProductName.value} ${newProductDescription.value} ${newProductPrice.value}`)
+        // TODO: Validate input.
+        const product: Product = {
+          id: '',
+          name: newProductName.value,
+          description: newProductDescription.value,
+          price: Number(newProductPrice.value),
+        }
+        productStore.addProduct(product)
         newProductName.value = ''
         newProductDescription.value = ''
         newProductPrice.value = ''
+        console.log(`Submitted ${product.name}, ${product.description}, ${product.price}`)
       }
     }
     return { handleSubmit, newProductName, newProductDescription, newProductPrice }
