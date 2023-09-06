@@ -1,6 +1,11 @@
 <script setup lang="ts">
 import ProductDetails from '@/components/ProductDetails.vue'
 import ProductForm from '@/components/ProductForm.vue'
+import { useProductStore } from '@/stores/ProductStore'
+
+const productStore = useProductStore()
+
+productStore.getProducts()
 </script>
 
 <template>
@@ -10,7 +15,9 @@ import ProductForm from '@/components/ProductForm.vue'
   <ProductForm />
 
   <!-- List -->
-  <ProductDetails />
+  <div v-for="product in productStore.products" :key="product.id">
+    <ProductDetails :product="product" />
+  </div>
 </template>
 
 <style scoped></style>

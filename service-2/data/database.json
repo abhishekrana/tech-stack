@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": "1ffa9231-7af4-4f4a-b551-9e321d2fb04a",
+      "name": "mock-name-1",
+      "description": "mock-description-1",
+      "price": 3.14
+    },
+    {
+      "id": "2aa359c9-5288-4496-9a11-dbea4cbfb7e4",
+      "name": "mock-name-2",
+      "description": "mock-description-2",
+      "price": 42
+    }
+  ]
+}
