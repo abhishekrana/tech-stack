@@ -5,7 +5,7 @@
 
 ./setup.sh
 
-# TODO: Run migrations
+# Port forward postgresql and run all SQL in `migrations` directory.
 
 cd k8s/deployments/local
 tilt up
@@ -29,11 +29,25 @@ tilt up
 - [ ] Rabbitmq
 - [ ] Github Actions
 - [ ] Golang
-- [ ] Vue.js
+- [x] Vue3
+  - [x] Typescript
+  - [x] Pinia (State Management)
 
 ## Deployment
+
 ![K3D deployment](assets/k3d_deployment.jpg 'K3D Deployment')
 
 ## Service-1
 
+**Backend**
+
+- /v1/users/ - PostgreSQL
+- /v1/products/ - MongoDB
+
 ![Service-1: Swagger](assets/service-1_swagger.png 'Service-1: Swagger')
+
+## Service-2
+
+**Frontend**
+
+![Service-2: Products](assets/service-2_products.jpg 'Service-2: Products')

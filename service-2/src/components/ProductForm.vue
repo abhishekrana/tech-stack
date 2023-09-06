@@ -42,9 +42,25 @@ export default defineComponent({
     <input type="text" placeholder="Enter name" v-model="newProductName" />
     <input type="text" placeholder="Enter description" v-model="newProductDescription" />
     <input type="text" placeholder="Enter price" v-model="newProductPrice" />
-    <button>Add</button>
+    <button class="submit-btn">Add</button>
     <!-- <button type="submit">Add</button> -->
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+form input {
+  border: 1px solid #009879;
+  padding: 2px 15px;
+  margin: 0px 2px;
+}
+
+.submit-btn {
+  background-color: #009879;
+  border: none;
+  color: white;
+  padding: 2px 20px;
+  text-decoration: none;
+  margin: 0px 10px;
+  cursor: pointer;
+}
+</style>

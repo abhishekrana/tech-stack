@@ -9,10 +9,6 @@ export default defineComponent({
       required: true,
       type: Array as PropType<Product[]>,
     },
-    // product: {
-    //   required: true,
-    //   type: Object as PropType<Product>,
-    // },
   },
   setup() {
     return {}
@@ -21,14 +17,7 @@ export default defineComponent({
 </script>
 
 <template>
-  <!-- <div id="product">
-    <div class="product-detail">{{ product.id }}</div>
-    <div class="product-detail">{{ product.name }}</div>
-    <div class="product-detail">{{ product.description }}</div>
-    <div class="product-detail">{{ product.price }}</div>
-  </div> -->
-
-  <table class="styled-table">
+  <table class="products-table">
     <thead>
       <tr>
         <th>ID</th>
@@ -49,19 +38,7 @@ export default defineComponent({
 </template>
 
 <style scoped>
-/* #product {
-  padding-top: 20px;
-}
-
-.product-detail {
-  display: inline-block;
-  padding: 4px;
-  margin: 4px;
-  border: 1px solid black;
-  background-color: #eeeeee;
-} */
-
-.styled-table {
+.products-table {
   border-collapse: collapse;
   margin: 25px 0;
   font-size: 0.9em;
@@ -70,30 +47,30 @@ export default defineComponent({
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
 }
 
-.styled-table thead tr {
+.products-table thead tr {
   background-color: #009879;
   color: #ffffff;
   text-align: left;
 }
 
-.styled-table th,
-.styled-table td {
+.products-table th,
+.products-table td {
   padding: 12px 15px;
 }
 
-.styled-table tbody tr {
+.products-table tbody tr {
   border-bottom: 1px solid #dddddd;
 }
 
-.styled-table tbody tr:nth-of-type(even) {
+.products-table tbody tr:nth-of-type(even) {
   background-color: #f3f3f3;
 }
 
-.styled-table tbody tr:last-of-type {
+.products-table tbody tr:last-of-type {
   border-bottom: 2px solid #009879;
 }
 
-.styled-table tbody tr.active-row {
+.products-table tbody tr.active-row {
   font-weight: bold;
   color: #009879;
 }

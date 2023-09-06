@@ -10,15 +10,12 @@ productStore.getProducts()
 
 <template>
   <h1>Products</h1>
-
-  <!-- Create -->
   <ProductForm />
-
-  <!-- List -->
   <ProductDetails :products="productStore.products" />
-  <!-- <div v-for="product in productStore.products" :key="product.id">
-    <ProductDetails :product="product" />
-  </div> -->
 </template>
 
-<style scoped></style>
+<style scoped>
+h1 {
+  color: #009879;
+}
+</style>

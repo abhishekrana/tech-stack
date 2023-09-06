@@ -12,7 +12,7 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write src/",
-    "mock-backend": "json-server -w ./data/database.json"
+    "backend:mock": "json-server -w ./data/database.json"
   },
   "dependencies": {
     "json-server": "^0.17.3",
