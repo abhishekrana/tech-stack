@@ -23,7 +23,6 @@ export const useProductStore = defineStore('productStore', () => {
   }
 
   async function addProduct(product: Product): Promise<void> {
-    products.value.push(product)
     const res: Response = await fetch('http://localhost:3000/products', {
       method: 'POST',
       body: JSON.stringify(product),
@@ -32,6 +31,9 @@ export const useProductStore = defineStore('productStore', () => {
     if (res.status != 201) {
       console.error(res)
     }
+    const data = await res.json()
+    product.id = data.id
+    products.value.push(product)
   }
 
   async function deleteProduct(id: string): Promise<void> {

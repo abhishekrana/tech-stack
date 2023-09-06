@@ -15,9 +15,10 @@ productStore.getProducts()
   <ProductForm />
 
   <!-- List -->
-  <div v-for="product in productStore.products" :key="product.id">
+  <ProductDetails :products="productStore.products" />
+  <!-- <div v-for="product in productStore.products" :key="product.id">
     <ProductDetails :product="product" />
-  </div>
+  </div> -->
 </template>
 
 <style scoped></style>
