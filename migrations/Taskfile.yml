@@ -1,0 +1,8 @@
+version: '3'
+
+tasks:
+  migrate:
+    desc: Run migrations
+    dir: src/migrations
+    cmds:
+      - go run cmd/main.go

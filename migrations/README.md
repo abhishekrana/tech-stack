@@ -1,16 +1,20 @@
-# Setup
+# Migrations
+
+## Run migrations
 
 ```bash
-go mod init migrations
+task migrate
 ```
 
-# Run
+# Misc
+
+## Bootstrap a new service
 
 ```bash
-go run cmd/main.go
+go mod init service-name
 ```
 
-# Install package
+## Install a new dependency
 
 ```
 go get github.com/package

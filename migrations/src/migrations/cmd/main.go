@@ -18,8 +18,7 @@ func main() {
 	fmt.Println(postgresqlConfig)
 
 	// Connect to the database
-	// url := fmt.Sprintf("postgres://%v:%v/%v?sslmode=enable", postgresqlConfig.Host, postgresqlConfig.Port, postgresqlConfig.Database)
-	url := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable",
+	url := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable search_path=public",
 		postgresqlConfig.Host, postgresqlConfig.Port, postgresqlConfig.User, postgresqlConfig.Password, postgresqlConfig.Database)
 	fmt.Println(url)
 	db, err := sql.Open("postgres", url)
@@ -39,12 +38,16 @@ func main() {
 		panic(err)
 	}
 	m, err := migrate.NewWithDatabaseInstance(
-		"file:///workspace/migrations",
+		"file:///workspace/migrations/files",
 		"postgres", driver)
 	if err != nil {
 		panic(err)
 	}
-	m.Up() // or m.Step(2) if you want to explicitly set the number of migrations to run
+	m.Up()
+	// m.Step(2) // to explicitly set the number of migrations to run
+	// if err := m.Up(); err != nil {
+	// 	panic(err)
+	// }
 
 	fmt.Println("migration completed successfully")
 }

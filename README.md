@@ -3,10 +3,16 @@
 ```
 ./bootstrap.sh
 
+# Install dependencies and setup k8s cluster
 ./setup.sh
 
-# Port forward postgresql and run all SQL in `migrations` directory.
+# Run migrations (optional)
+cd k8s/deployments/local
+task port-forward-postgresql
+cd migrations
+task migrate
 
+# Deploy
 cd k8s/deployments/local
 tilt up
 ```
@@ -14,8 +20,8 @@ tilt up
 ## Roadmap
 
 - [x] [Devcontainers](https://code.visualstudio.com/docs/devcontainers/containers)
-  - [x] WSL2 (Windows)
-  - [ ] Linux
+  - [x] [WSL2 Windows](https://code.visualstudio.com/blogs/2020/07/01/containers-wsl)
+  - [ ] [Linux](https://code.visualstudio.com/docs/devcontainers/create-dev-container)
 - [x] Python
   - [x] [FastAPI](https://fastapi.tiangolo.com)
   - [x] [Pydantic V2](https://docs.pydantic.dev/latest)
@@ -23,15 +29,15 @@ tilt up
 - [x] [k3d](https://k3d.io)
 - [x] [Helm](https://helm.sh)
 - [x] [Tilt](https://tilt.dev)
-- [x] Postgresql
-- [x] MongoDB
-- [ ] Redis
-- [ ] Rabbitmq
-- [ ] Github Actions
-- [ ] Golang
-- [x] Vue3
-  - [x] Typescript
-  - [x] Pinia (State Management)
+- [x] [Postgresql](https://www.postgresql.org/)
+- [x] [MongoDB](https://www.mongodb.com/)
+- [ ] [Redis](https://redis.io/)
+- [ ] [Rabbitmq](https://www.rabbitmq.com/)
+- [ ] [Github Actions](https://github.com/features/actions)
+- [ ] [Golang](https://go.dev/)
+- [x] [Vue3](https://vuejs.org/)
+  - [x] [Typescript](https://vuejs.org/guide/typescript/overview.html)
+  - [x] [Pinia (State Management)](https://pinia.vuejs.org/)
 
 ## Deployment
 
