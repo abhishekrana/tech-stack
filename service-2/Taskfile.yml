@@ -19,7 +19,7 @@ vars:
 
 tasks:
   # Build ------------------------------------
-  build-service-1:
+  build-service-2:
     desc: Build Service 1
     cmds:
       - |
@@ -29,25 +29,25 @@ tasks:
         --build-arg GIT_HASH={{.GIT_HASH}} \
         --build-arg GIT_TAG={{.GIT_TAG}} \
         --target {{.BUILD_TYPE}} \
-        --tag {{.REGISTRY}}/service-1:latest \
+        --tag {{.REGISTRY}}/service-2:latest \
         --file Dockerfile .
 
-  run-service-1:
-    desc: Run Service 1
-    deps: [build-service-1]
+  run-service-2:
+    desc: Run Service 2
+    deps: [build-service-2]
     cmds:
       - |
         docker run -it --rm --network="host" \
-        {{.REGISTRY}}/service-1:latest
+        {{.REGISTRY}}/service-2:latest
 
   # Misc ------------------------------------
   poetry-lock:
     desc: Generate poetry.lock
-    deps: [build-service-1]
+    deps: [build-service-2]
     cmds:
       - docker run --rm
         -u $(id -u):$(id -g)
-        --workdir /workspace/service-1
-        -v ${PWD}:/workspace/service-1
-        {{.REGISTRY}}/service-1
+        --workdir /workspace/service-2
+        -v ${PWD}:/workspace/service-2
+        {{.REGISTRY}}/service-2
         bash -c "poetry lock"

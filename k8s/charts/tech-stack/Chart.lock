@@ -5,5 +5,8 @@ dependencies:
 - name: service-1
   repository: file://service-1
   version: 0.1.0
-digest: sha256:847b61248a5b4db40424846d341a85087c418015a1212c88a32823bb091e91e7
-generated: "2023-09-11T22:55:23.327062659+02:00"
+- name: service-2
+  repository: file://service-2
+  version: 0.1.0
+digest: sha256:596de4440e3d8d1aa4efadae5ed8b9b075d9fbb4111972bf530d175bf18e7c9d
+generated: "2023-09-11T23:53:06.304108639+02:00"

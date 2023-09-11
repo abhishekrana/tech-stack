@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "service-1.fullname" . }}
+  name: {{ include "service-2.fullname" . }}
   labels:
-    {{- include "service-1.labels" . | nindent 4 }}
+    {{- include "service-2.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "service-1.selectorLabels" . | nindent 6 }}
+      {{- include "service-2.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +18,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "service-1.selectorLabels" . | nindent 8 }}
+        {{- include "service-2.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "service-1.serviceAccountName" . }}
+      serviceAccountName: {{ include "service-2.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -48,8 +48,8 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
-            - name: POSTGRESQL_SVC_HOST
-              value: postgresql
+            - name: MONGODB_SVC_HOST
+              value: mongodb
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

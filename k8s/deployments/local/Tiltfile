@@ -25,6 +25,15 @@ docker_build(
 )
 
 docker_build(
+    ref="registry.localhost:32000/service-2",
+    context="../../../service-2",
+    build_args={"BUILD_TYPE": "dev-test"},
+    dockerfile="../../../service-2/Dockerfile",
+    target="dev-test",
+    live_update=[sync("../../../service-2/src", "/workspace/service-2/src")],
+)
+
+docker_build(
     ref="registry.localhost:32000/migrations",
     context="../../../migrations",
     build_args={"BUILD_TYPE": "dev-test"},

@@ -1,14 +1,7 @@
-# service-2
+# Service 1
 
-## Project Setup
-
+## Setup
 ```bash
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```bash
-npm run backend:mock
-npm run dev
+poetry install
+source .venv/bin/activate
 ```

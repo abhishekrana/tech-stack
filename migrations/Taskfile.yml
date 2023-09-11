@@ -38,4 +38,4 @@ tasks:
     cmds:
       - |
         docker run -it --rm --network="host" \
-        registry.localhost/migrations:latest
+        {{.REGISTRY}}/migrations:latest

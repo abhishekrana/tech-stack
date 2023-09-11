@@ -1,0 +1,21 @@
+version: '3'
+
+vars:
+  PATH: .venv/bin:$PATH
+
+tasks:
+  # Application ------------------------------------
+  run-app-1:
+    desc: Run App 1
+    cmds:
+      - export PATH={{.PATH}} &&
+        export $(grep -v '^#' .env | xargs) &&
+        cd src/app_1/cmd &&
+        ./run_app_1.sh
+
+  pre-commit-checks:
+    desc: Run pre-commit checks (sequential)
+    cmds:
+      - export PATH={{.PATH}} && echo "Black..." && python3 -m black src
+      - export PATH={{.PATH}} && echo "Ruff..." && python3 -m ruff check src
+      - export PATH={{.PATH}} && echo "Mypy..." && python3 -m mypy src

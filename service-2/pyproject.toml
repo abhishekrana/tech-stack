@@ -1,7 +1,7 @@
 [tool.poetry]
-name = "service-1"
+name = "service-2"
 version = "0.1.0"
-description = "Service 1"
+description = "Service 2"
 authors = ["Abhishek Rana <abhishekrana502@gmail.com>"]
 
 [build-system]
@@ -10,8 +10,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+beanie = "1.21.0"
 fastapi = "0.101.1"
-pg8000 = "1.30.1"
 pydantic = "2.2.0"
 pydantic-settings = "2.0.3"
 requests = "2.31.0"
