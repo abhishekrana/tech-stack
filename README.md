@@ -51,17 +51,13 @@ tilt up
 
 ## Service-1
 
-**Backend (PostgreSQL)**
-
-- /v1/users/
+**Backend (FastAPI + PostgreSQL)**
 
 ![Service-1: Swagger](assets/service-1_swagger.jpg 'Service-1: Swagger')
 
 ## Service-2
 
-**Backend (MongoDB)**
-
-- /v1/products/
+**Backend (FastAPI + MongoDB)**
 
 ![Service-2: Swagger](assets/service-2_swagger.jpg 'Service-2: Swagger')
 
