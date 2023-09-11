@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "migrations.fullname" . }}
+  labels: {{ include "migrations.labels" . | nindent 4 }}
+  annotations:
+    # This is what defines this resource as a hook. Without this line, the
+    # job is considered part of the release.
+    'helm.sh/hook': pre-install, pre-upgrade
+    'helm.sh/hook-weight': '1'
+    # "helm.sh/hook-delete-policy": hook-succeeded
+spec:
+  template:
+    metadata:
+      name: '{{ .Release.Name }}'
+      labels: {{ include "migrations.labels" . | nindent 4 }}
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: {{ .Chart.Name }}
+          image: '{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}'
+          imagePullPolicy: {{ .Values.image.pullPolicy }} 
+          env:
+            - name: POSTGRESQL_SVC_HOST
+              value: postgresql 

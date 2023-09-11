@@ -130,6 +130,13 @@ tasks:
       - lsof -t -i:5432 | xargs -r kill -9
       - kubectl port-forward postgresql-0 5432:5432
 
+  shell-postgresql:
+    desc: Log into postgresql shell
+    cmds:
+      - |
+        export POSTGRES_ADMIN_PASSWORD=$(kubectl get secret --namespace default postgresql -o jsonpath="{.data.postgres-password}" | base64 -d) &&
+        PGPASSWORD="$POSTGRES_PASSWORD" psql --host 127.0.0.1 -U admin -d tech_stack_db -p 5432
+
   # https://artifacthub.io/packages/helm/bitnami/prometheus
   install-prometheus:
     desc: Install prometheus

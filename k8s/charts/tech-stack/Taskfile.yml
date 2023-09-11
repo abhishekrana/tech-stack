@@ -7,6 +7,7 @@ tasks:
       - helm dependency update
 
   show-templates:
+    deps: [update-dependency]
     desc: Render chart templates
     cmds:
       - helm template --debug tech-stack ./ --include-crds --values values.yaml
