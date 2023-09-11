@@ -22,6 +22,18 @@ service-2:
       cpu: 100m
       memory: 128Mi
 
+service-3:
+  image:
+    repository: registry.localhost:32000/service-3
+    tag: latest
+  resources:
+    limits:
+      cpu: 400m
+      memory: 512Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
 migrations:
   image:
     repository: registry.localhost:32000/migrations

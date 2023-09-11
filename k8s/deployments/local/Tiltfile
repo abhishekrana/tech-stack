@@ -15,6 +15,15 @@ version_settings(check_updates=False)
 
 # Build
 docker_build(
+    ref="registry.localhost:32000/migrations",
+    context="../../../migrations",
+    build_args={"BUILD_TYPE": "dev-test"},
+    dockerfile="../../../migrations/Dockerfile",
+    target="dev-test",
+    live_update=[sync("../../../migrations/src", "/workspace/migrations/src")],
+)
+
+docker_build(
     # ref="docker.io/service-1",
     ref="registry.localhost:32000/service-1",
     context="../../../service-1",
@@ -34,13 +43,14 @@ docker_build(
 )
 
 docker_build(
-    ref="registry.localhost:32000/migrations",
-    context="../../../migrations",
+    ref="registry.localhost:32000/service-3",
+    context="../../../service-3",
     build_args={"BUILD_TYPE": "dev-test"},
-    dockerfile="../../../migrations/Dockerfile",
+    dockerfile="../../../service-3/Dockerfile",
     target="dev-test",
-    live_update=[sync("../../../migrations/src", "/workspace/migrations/src")],
+    live_update=[sync("../../../service-3/src", "/workspace/service-3/src")],
 )
+
 
 # Helm
 k8s_yaml(helm("../../charts/tech-stack", name="tech-stack", values=["values.yaml"]))

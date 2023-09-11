@@ -1,0 +1,11 @@
+version: '3'
+
+vars:
+  PATH: .venv/bin:$PATH
+
+tasks:
+  # Application ------------------------------------
+  run-app-1:
+    desc: Run App 1
+    cmds:
+      - npm run dev

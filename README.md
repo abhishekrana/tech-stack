@@ -1,14 +1,22 @@
 # tech-stack
 
+## Services
+
+| Service    | Stack                |
+| ---------- | -------------------- |
+| migrations | GoLang               |
+| service-1  | FastAPI + PostgreSQL |
+| service-2  | FastAPI + MongoDB    |
+| service-3  | Vue.js               |
+
+## Setup
+
 ```
+# Bootstrap
 ./bootstrap.sh
 
 # Install dependencies and setup k8s cluster
 ./setup.sh
-
-# Run migrations (optional)
-pushd k8s/deployments/local && task port-forward-postgresql && popd
-pushd migrations && task run-migrations && popd
 
 # Deploy
 cd k8s/deployments/local
@@ -32,7 +40,7 @@ tilt up
 - [ ] [Redis](https://redis.io/)
 - [ ] [Rabbitmq](https://www.rabbitmq.com/)
 - [ ] [Github Actions](https://github.com/features/actions)
-- [ ] [Golang](https://go.dev/)
+- [x] [Golang](https://go.dev/)
 - [x] [Vue3](https://vuejs.org/)
   - [x] [Typescript](https://vuejs.org/guide/typescript/overview.html)
   - [x] [Pinia (State Management)](https://pinia.vuejs.org/)
