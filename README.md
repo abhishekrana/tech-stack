@@ -51,15 +51,22 @@ tilt up
 
 ## Service-1
 
-**Backend**
+**Backend (PostgreSQL)**
 
-- /v1/users/ - PostgreSQL
-- /v1/products/ - MongoDB
+- /v1/users/
 
-![Service-1: Swagger](assets/service-1_swagger.png 'Service-1: Swagger')
+![Service-1: Swagger](assets/service-1_swagger.jpg 'Service-1: Swagger')
 
 ## Service-2
 
-**Frontend**
+**Backend (MongoDB)**
 
-![Service-2: Products](assets/service-2_products.jpg 'Service-2: Products')
+- /v1/products/
+
+![Service-2: Swagger](assets/service-2_swagger.jpg 'Service-2: Swagger')
+
+## Service-3
+
+**Frontend (Vue.js)**
+
+![Service-3: Products](assets/service-3_products.jpg 'Service-3: Products')
