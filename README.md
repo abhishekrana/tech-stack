@@ -7,10 +7,8 @@
 ./setup.sh
 
 # Run migrations (optional)
-cd k8s/deployments/local
-task port-forward-postgresql
-cd migrations
-task migrate
+pushd k8s/deployments/local && task port-forward-postgresql && popd
+pushd migrations && task run-migrations && popd
 
 # Deploy
 cd k8s/deployments/local

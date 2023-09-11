@@ -15,12 +15,10 @@ import (
 func main() {
 	configs.LoadPostgresqlConfig()
 	postgresqlConfig := configs.LoadPostgresqlConfig()
-	fmt.Println(postgresqlConfig)
 
 	// Connect to the database
 	url := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable search_path=public",
 		postgresqlConfig.Host, postgresqlConfig.Port, postgresqlConfig.User, postgresqlConfig.Password, postgresqlConfig.Database)
-	fmt.Println(url)
 	db, err := sql.Open("postgres", url)
 	if err != nil {
 		panic(err)

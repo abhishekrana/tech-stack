@@ -2,6 +2,11 @@ version: '3'
 
 tasks:
   update-dependency:
-    desc: create-k3d
+    desc: Generate helm dependencies
     cmds:
       - helm dependency update
+
+  show-templates:
+    desc: Render chart templates
+    cmds:
+      - helm template --debug tech-stack ./ --include-crds --values values.yaml

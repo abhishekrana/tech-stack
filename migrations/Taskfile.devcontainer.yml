@@ -1,0 +1,12 @@
+version: '3'
+
+vars:
+  PATH: .venv/bin:$PATH
+
+tasks:
+  # Application ------------------------------------
+  run-migrations:
+    desc: Run migrations
+    dir: src/migrations
+    cmds:
+      - go run cmd/main.go

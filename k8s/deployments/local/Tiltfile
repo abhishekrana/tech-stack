@@ -24,6 +24,15 @@ docker_build(
     live_update=[sync("../../../service-1/src", "/workspace/service-1/src")],
 )
 
+docker_build(
+    ref="registry.localhost:32000/migrations",
+    context="../../../migrations",
+    build_args={"BUILD_TYPE": "dev-test"},
+    dockerfile="../../../migrations/Dockerfile",
+    target="dev-test",
+    live_update=[sync("../../../migrations/src", "/workspace/migrations/src")],
+)
+
 # Helm
 k8s_yaml(helm("../../charts/tech-stack", name="tech-stack", values=["values.yaml"]))
 

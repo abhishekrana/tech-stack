@@ -3,7 +3,7 @@
 ## Run migrations
 
 ```bash
-task migrate
+task run-migrations
 ```
 
 # Misc

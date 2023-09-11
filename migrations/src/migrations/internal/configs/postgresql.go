@@ -21,6 +21,6 @@ func LoadPostgresqlConfig() PostgresqlConfig {
 		log.Fatal("invalid postgresql config: ", config.Host, config.Port, config.Database, config.User)
 		// panic(err)
 	}
-	log.Println("postgresql config: ", config.Host, config.Port, config.Database, config.User)
+	log.Printf("postgresql config - host:%v, port:%v, database:%v, user:%v", config.Host, config.Port, config.Database, config.User)
 	return config
 }

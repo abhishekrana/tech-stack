@@ -1,6 +1,9 @@
 dependencies:
+- name: migrations
+  repository: file://migrations
+  version: 0.1.0
 - name: service-1
   repository: file://service-1
   version: 0.1.0
-digest: sha256:dcf94c60736c5c0091aa04a20627d6c8f2cf562cfd5baa2d09f06927e56f82e6
-generated: "2023-08-29T14:15:55.063057694+02:00"
+digest: sha256:847b61248a5b4db40424846d341a85087c418015a1212c88a32823bb091e91e7
+generated: "2023-09-11T22:55:23.327062659+02:00"
