@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-world-deployment
+  labels:
+    app: hello-world
+    app.kubernetes.io/name: hello-world
+    app.kubernetes.io/instance: tech-stack
+    app.kubernetes.io/version: '0.1.0'
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-world
+      app.kubernetes.io/name: hello-world
+      app.kubernetes.io/instance: tech-stack
+  template:
+    metadata:
+      labels:
+        app: hello-world
+        app.kubernetes.io/name: hello-world
+        app.kubernetes.io/instance: tech-stack
+    spec:
+      containers:
+        - name: hello-world
+          image: abhishekrana502/hello-world:latest
+          imagePullPolicy: Always
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP

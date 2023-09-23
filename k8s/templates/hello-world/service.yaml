@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-world-service
+  labels:
+    app.kubernetes.io/name: hello-world
+    app.kubernetes.io/instance: tech-stack
+    app.kubernetes.io/version: '0.1.0'
+spec:
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    app.kubernetes.io/name: hello-world
+    app.kubernetes.io/instance: tech-stack
