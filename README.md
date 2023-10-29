@@ -2,12 +2,13 @@
 
 ## Services
 
-| Service    | Stack                |
-| ---------- | -------------------- |
-| migrations | GoLang               |
-| service-1  | FastAPI + PostgreSQL |
-| service-2  | FastAPI + MongoDB    |
-| service-3  | Vue.js               |
+| Service    | Stack                                      |
+| ---------- | ------------------------------------------ |
+| migrations | GoLang + Postgres                          |
+| service-1  | Python (FastAPI) + PostgreSQL (SQLAlchemy) |
+| service-2  | Python (FastAPI) + MongoDB (Beanie)        |
+| service-3  | Vue.js                                     |
+| service-4  | GoLang (Chi) + Redis                       |
 
 ## Setup
 
@@ -37,7 +38,7 @@ tilt up
 - [x] [Tilt](https://tilt.dev)
 - [x] [Postgresql](https://www.postgresql.org/)
 - [x] [MongoDB](https://www.mongodb.com/)
-- [ ] [Redis](https://redis.io/)
+- [x] [Redis](https://redis.io/)
 - [ ] [Rabbitmq](https://www.rabbitmq.com/)
 - [ ] [Github Actions](https://github.com/features/actions)
 - [x] [Golang](https://go.dev/)

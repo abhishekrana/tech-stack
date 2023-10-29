@@ -1,0 +1,43 @@
+version: '3'
+
+env:
+  BUILD_CACHE: 1
+  COMPOSE_DOCKER_CLI_BUILD: 1
+  DOCKER_BUILDKIT: 1
+
+vars:
+  BUILD_TYPE: "'{{if .BUILD_TYPE}}{{.BUILD_TYPE}}{{else}}dev-test{{end}}"
+  REGISTRY: 'registry.localhost'
+  GIT_HASH:
+    sh: git log -1 --format=%h
+  GIT_TAG:
+    sh: git describe --tags --always
+
+tasks:
+  # Build ------------------------------------
+  build-orders:
+    desc: Build orders
+    cmds:
+      - |
+        docker -l warn build \
+        {{- if not .BUILD_CACHE }}--no-cache \{{end}}
+        --build-arg BUILD_TYPE={{.BUILD_TYPE}} \
+        --build-arg GIT_HASH={{.GIT_HASH}} \
+        --build-arg GIT_TAG={{.GIT_TAG}} \
+        --target {{.BUILD_TYPE}} \
+        --tag {{.REGISTRY}}/orders:latest \
+        --file Dockerfile .
+
+  run-orders:
+    desc: Run orders
+    deps: [build-orders]
+    cmds:
+      - |
+        docker run -it --rm --network="host" \
+        {{.REGISTRY}}/orders:latest
+
+  # Dependencies for testing
+  run-redis:
+    desc: Run redis
+    cmds:
+      - docker run -p 6379:6379 redis:latest
