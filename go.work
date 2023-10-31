@@ -1,0 +1,6 @@
+go 1.21.3
+
+use (
+	./migrations/src/migrations
+	./service-4/src/app-1
+)
