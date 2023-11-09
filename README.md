@@ -28,7 +28,7 @@ tilt up
 
 - [x] [Devcontainers](https://code.visualstudio.com/docs/devcontainers/containers)
   - [x] [WSL2 Windows](https://code.visualstudio.com/blogs/2020/07/01/containers-wsl)
-  - [ ] [Linux](https://code.visualstudio.com/docs/devcontainers/create-dev-container)
+  - [x] [Linux](https://code.visualstudio.com/docs/devcontainers/create-dev-container)
 - [x] Python
   - [x] [FastAPI](https://fastapi.tiangolo.com)
   - [x] [Pydantic V2](https://docs.pydantic.dev/latest)

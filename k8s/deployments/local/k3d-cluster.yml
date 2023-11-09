@@ -11,9 +11,9 @@ registries:
     name: registry.localhost
     host: '0.0.0.0'
     hostPort: '32000'
-# options:
-#   k3s:
-#     extraArgs:
-#       - arg: '--no-deploy=traefik'
-#         nodeFilters:
-#           - server:*
+options:
+  k3s:
+    extraArgs:
+      - arg: "--disable=traefik"
+        nodeFilters:
+          - server:*

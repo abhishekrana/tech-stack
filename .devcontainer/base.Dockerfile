@@ -76,7 +76,7 @@ RUN python3 -m pip install --upgrade pip \
     && python3 -m pip install --no-cache-dir poetry==${POETRY_VERSION}
 
 # Install go
-ARG GO_VERSION=1.21.0
+ARG GO_VERSION=1.21.3
 RUN cd /tmp \
     && wget --progress=dot:giga https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz \
     && sudo tar -C /usr/local -xzf go${GO_VERSION}.linux-amd64.tar.gz \
@@ -97,5 +97,13 @@ RUN sudo npm install -g npm@${NPM_VERSION}
 ARG TASK_VERSION="v3.28.0"
 RUN sudo bash -c "$(curl --location https://taskfile.dev/install.sh)" -- -b /usr/local/bin/ -d ${TASK_VERSION} \
     && sudo wget -O /usr/share/bash-completion/completions/task.bash https://raw.githubusercontent.com/go-task/task/${TASK_VERSION}/completion/bash/task.bash
+
+COPY ../Taskfile.yml ../Taskfile.install.yml /tmp/
+RUN cd /tmp \
+    && task install:helm \
+    && task install:k3d \
+    && task install:k9s \
+    && task install:kubectl \
+    && task install:tilt
 
 WORKDIR /workspace
