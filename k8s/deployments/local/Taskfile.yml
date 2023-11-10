@@ -11,15 +11,35 @@ vars:
   REDIS_VERSION: 17.15.4 # app version: 7.2.0
 
 tasks:
-  create-k3d:
+  install-k3d:
     desc: Create k3d cluster
     cmds:
       - k3d cluster create tech-stack --config k3d-cluster.yml
 
-  delete-k3d:
+  uninstall-k3d:
     desc: Delete k3d cluster
     cmds:
       - k3d cluster delete tech-stack
+
+  install-nginx-controller:
+    desc: Install nginx controller
+    vars:
+      APP_VERSION: 1.9.4
+    cmds:
+      - cmd: kubectl create namespace ingress-nginx
+        ignore_error: true
+      - kubectl apply -f ../../charts/tech-stack/ingress/controller/nginx/manifests/nginx-ingress.{{.APP_VERSION}}.yaml
+      - kubectl -n ingress-nginx get svc
+      - kubectl apply -f ../../charts/tech-stack/ingress/controller/nginx/features/routing-by-path-rewrite.yaml
+
+  uninstall-nginx-controller:
+    desc: Uninstall nginx controller
+    vars:
+      APP_VERSION: 1.9.4
+    cmds:
+      - kubectl delete -f ../../charts/tech-stack/ingress/controller/nginx/features/routing-by-path-rewrite.yaml
+      - kubectl delete -f ../../charts/tech-stack/ingress/controller/nginx/manifests/nginx-ingress.{{.APP_VERSION}}.yaml
+      - kubectl delete namespace ingress-nginx
 
   # https://artifacthub.io/packages/helm/bitnami/elasticsearch
   install-elasticsearch:

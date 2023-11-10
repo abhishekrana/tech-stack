@@ -90,7 +90,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo -E bash
     sudo apt-get install -y nodejs
 
 # Install npm
-ARG NPM_VERSION="9.8.1"
+ARG NPM_VERSION="10.2.3"
 RUN sudo npm install -g npm@${NPM_VERSION}
 
 # Install task

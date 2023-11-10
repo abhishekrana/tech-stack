@@ -16,7 +16,7 @@ popd
 
 # Create k8s cluster
 pushd k8s/deployments/local
-task delete-k3d
-task create-k3d
+task uninstall-k3d
+task install-k3d
 task install-dependencies
 popd

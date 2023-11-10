@@ -11,7 +11,7 @@ task update-dependency
 
 ```bash
 cd k8s/deployments/local
-task create-k3d
+task install-k3d
 ```
 
 3. Deploy dependencies

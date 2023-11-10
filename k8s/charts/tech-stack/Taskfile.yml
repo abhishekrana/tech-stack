@@ -11,3 +11,16 @@ tasks:
     desc: Render chart templates
     cmds:
       - helm template --debug tech-stack ./ --include-crds --values values.yaml
+
+  get-nginx-controller-manifest:
+    desc: Get nginx controller deployment manifest
+    vars:
+      CHART_VERSION: 4.8.3
+      APP_VERSION: 1.9.4
+    cmds:
+      - helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
+      - helm template ingress-nginx ingress-nginx
+        --repo https://kubernetes.github.io/ingress-nginx
+        --version {{.CHART_VERSION}}
+        --namespace ingress-nginx >
+        ./ingress/controller/nginx/manifests/nginx-ingress.{{.APP_VERSION}}.yaml
