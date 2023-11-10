@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: tech-stack
+  name: service-1
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
@@ -10,17 +10,72 @@ spec:
     - host: localhost
       http:
         paths:
-          - path: /v1/users(/|$)(.*)
-            pathType: ImplementationSpecific
+          - path: /users(/|$)(.*)
+            pathType: Prefix
             backend:
               service:
                 name: tech-stack-service-1
                 port:
                   number: 5000
-          - path: /v1/products(/|$)(.*)
-            pathType: ImplementationSpecific
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-1-specific
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /v1/users/$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /v1/users(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tech-stack-service-1
+                port:
+                  number: 5000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-2
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /products(/|$)(.*)
+            pathType: Prefix
             backend:
               service:
                 name: tech-stack-service-2
                 port:
                   number: 5000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: service-2-specific
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /v1/products/$2
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: localhost
+      http:
+        paths:
+          - path: /v1/products(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: tech-stack-service-2
+                port:
+                  number: 5000
+---
+

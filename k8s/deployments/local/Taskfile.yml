@@ -21,25 +21,37 @@ tasks:
     cmds:
       - k3d cluster delete tech-stack
 
-  install-nginx-controller:
-    desc: Install nginx controller
+  # https://kubernetes.github.io/ingress-nginx/
+  install-ingress-nginx:
+    desc: Install ingress nginx controller
     vars:
       APP_VERSION: 1.9.4
     cmds:
-      - cmd: kubectl create namespace ingress-nginx
-        ignore_error: true
+      - kubectl create namespace ingress-nginx || true
       - kubectl apply -f ../../charts/tech-stack/ingress/controller/nginx/manifests/nginx-ingress.{{.APP_VERSION}}.yaml
+      - sleep 30
       - kubectl -n ingress-nginx get svc
       - kubectl apply -f ../../charts/tech-stack/ingress/controller/nginx/features/routing-by-path-rewrite.yaml
 
-  uninstall-nginx-controller:
-    desc: Uninstall nginx controller
+  uninstall-ingress-nginx:
+    desc: Uninstall ingress nginx controller
     vars:
       APP_VERSION: 1.9.4
     cmds:
-      - kubectl delete -f ../../charts/tech-stack/ingress/controller/nginx/features/routing-by-path-rewrite.yaml
-      - kubectl delete -f ../../charts/tech-stack/ingress/controller/nginx/manifests/nginx-ingress.{{.APP_VERSION}}.yaml
-      - kubectl delete namespace ingress-nginx
+      - kubectl delete -f ../../charts/tech-stack/ingress/controller/nginx/features/routing-by-path-rewrite.yaml || true
+      - kubectl delete -f ../../charts/tech-stack/ingress/controller/nginx/manifests/nginx-ingress.{{.APP_VERSION}}.yaml || true
+      - kubectl delete namespace ingress-nginx || true
+      - kubectl -n ingress-nginx get svc || true
+
+  port-forward-ingress-nginx:
+    desc: Port forward ingress ngingx
+    cmds:
+      - kubectl -n ingress-nginx port-forward svc/ingress-nginx-controller 443
+
+  get-ingress-nginx-ip:
+    desc: Get ingress ngingx ip address
+    cmds:
+      - kubectl -n ingress-nginx get svc ingress-nginx-controller -o json | jq -r '.status.loadBalancer.ingress[0].ip'
 
   # https://artifacthub.io/packages/helm/bitnami/elasticsearch
   install-elasticsearch:
