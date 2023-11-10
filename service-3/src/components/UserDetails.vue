@@ -22,8 +22,9 @@ export default defineComponent({
       <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
+        <th>Fullname</th>
+        <th>Created At</th>
+        <th>Updated At</th>
       </tr>
     </thead>
     <tbody>

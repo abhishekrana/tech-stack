@@ -24,12 +24,16 @@ export default defineComponent({
           name: newProductName.value,
           description: newProductDescription.value,
           price: Number(newProductPrice.value),
+          created_at: '',
+          updated_at: '',
         }
         productStore.addProduct(product)
         newProductName.value = ''
         newProductDescription.value = ''
         newProductPrice.value = ''
-        console.log(`Submitted ${product.name}, ${product.description}, ${product.price}`)
+        console.log(
+          `Submitted ${product.name}, ${product.description}, ${product.price}, ${product.created_at}, ${product.updated_at}`,
+        )
       }
     }
     return { handleSubmit, newProductName, newProductDescription, newProductPrice }

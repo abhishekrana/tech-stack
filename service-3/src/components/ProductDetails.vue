@@ -24,6 +24,8 @@ export default defineComponent({
         <th>Name</th>
         <th>Description</th>
         <th>Price</th>
+        <th>Created At</th>
+        <th>Updated At</th>
       </tr>
     </thead>
     <tbody>
@@ -32,6 +34,8 @@ export default defineComponent({
         <td>{{ product.name }}</td>
         <td>{{ product.description }}</td>
         <td>{{ product.price }}</td>
+        <td>{{ product.created_at }}</td>
+        <td>{{ product.updated_at }}</td>
       </tr>
     </tbody>
   </table>

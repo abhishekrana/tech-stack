@@ -10,29 +10,24 @@ export default defineComponent({
 
     const newUserName: Ref<string> = ref('')
     const newUserFullname: Ref<string> = ref('')
-    const newUserCreatedAt: Ref<string> = ref('')
-    const newUserUpdatedAt: Ref<string> = ref('')
 
     const handleSubmit = () => {
-      console.log('abcd')
       if (newUserName.value.length > 0 && newUserFullname.value.length > 0) {
         // TODO: Validate input.
         const user: User = {
           id: '',
           name: newUserName.value,
           fullname: newUserFullname.value,
-          created_at: newUserCreatedAt.value,
-          updated_at: newUserUpdatedAt.value,
+          created_at: '',
+          updated_at: '',
         }
         userStore.addUser(user)
         newUserName.value = ''
         newUserFullname.value = ''
-        newUserCreatedAt.value = ''
-        newUserUpdatedAt.value = ''
         console.log(`Submitted ${user.name}, ${user.fullname}, ${user.created_at}, ${user.updated_at}`)
       }
     }
-    return { handleSubmit, newUserName, newUserFullname, newUserCreatedAt, newUserUpdatedAt }
+    return { handleSubmit, newUserName, newUserFullname }
   },
 })
 </script>

@@ -6,7 +6,6 @@ import type { Ref, ComputedRef } from 'vue'
 export const useProductStore = defineStore('productStore', () => {
   // Consts
   const baseURL = '/api/products'
-  // const baseURL = 'http://localhost:3000'
 
   // Refs/State
   const products: Ref<Product[]> = ref([])
@@ -29,7 +28,7 @@ export const useProductStore = defineStore('productStore', () => {
   async function addProduct(product: Product): Promise<void> {
     const res: Response = await fetch(baseURL + '/v1/products/', {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify([product]),
       headers: { 'Content-Type': 'application/json' },
     })
     if (res.status != 201) {
@@ -37,6 +36,8 @@ export const useProductStore = defineStore('productStore', () => {
     }
     const data = await res.json()
     product.id = data.id
+    product.created_at = data.created_at
+    product.updated_at = data.updated_at
     products.value.push(product)
   }
 

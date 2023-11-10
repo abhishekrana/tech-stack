@@ -6,7 +6,6 @@ import type { Ref, ComputedRef } from 'vue'
 export const useUserStore = defineStore('userStore', () => {
   // Consts
   const baseURL = '/api/users'
-  // const baseURL = 'http://localhost:3000'
 
   // Refs/State
   const users: Ref<User[]> = ref([])
@@ -26,18 +25,20 @@ export const useUserStore = defineStore('userStore', () => {
     loading = false
   }
 
-  async function addUser(product: User): Promise<void> {
+  async function addUser(user: User): Promise<void> {
     const res: Response = await fetch(baseURL + '/v1/users/', {
       method: 'POST',
-      body: JSON.stringify(product),
+      body: JSON.stringify([user]),
       headers: { 'Content-Type': 'application/json' },
     })
     if (res.status != 201) {
       console.error(res)
     }
     const data = await res.json()
-    product.id = data.id
-    users.value.push(product)
+    user.id = data.id
+    user.created_at = data.created_at
+    user.updated_at = data.updated_at
+    users.value.push(user)
   }
 
   async function deleteUser(id: string): Promise<void> {
