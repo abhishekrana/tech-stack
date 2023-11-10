@@ -11,7 +11,7 @@ spec:
       http:
         paths:
           - path: /users(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: tech-stack-service-1
@@ -31,7 +31,7 @@ spec:
       http:
         paths:
           - path: /v1/users(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: tech-stack-service-1
@@ -51,7 +51,7 @@ spec:
       http:
         paths:
           - path: /products(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: tech-stack-service-2
@@ -71,7 +71,7 @@ spec:
       http:
         paths:
           - path: /v1/products(/|$)(.*)
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: tech-stack-service-2
