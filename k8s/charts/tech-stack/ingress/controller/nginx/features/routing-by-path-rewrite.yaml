@@ -1,8 +1,9 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: service-1
+  name: tech-stack-routes
   annotations:
+    nginx.ingress.kubernetes.io/use-regex: 'true'
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
@@ -17,40 +18,6 @@ spec:
                 name: tech-stack-service-1
                 port:
                   number: 5000
-
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: service-1-specific
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /v1/users/$2
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: localhost
-      http:
-        paths:
-          - path: /api/v1/users(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: tech-stack-service-1
-                port:
-                  number: 5000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: service-2
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$2
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: localhost
-      http:
-        paths:
           - path: /api/products(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
@@ -58,45 +25,10 @@ spec:
                 name: tech-stack-service-2
                 port:
                   number: 5000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: service-2-specific
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /v1/products/$2
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: localhost
-      http:
-        paths:
-          - path: /api/v1/products(/|$)(.*)
-            pathType: ImplementationSpecific
-            backend:
-              service:
-                name: tech-stack-service-2
-                port:
-                  number: 5000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  name: service-3
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-spec:
-  ingressClassName: nginx
-  rules:
-    - host: localhost
-      http:
-        paths:
-          - path: /(.*)
+          - path: /(/|$)(.*)
             pathType: ImplementationSpecific
             backend:
               service:
                 name: tech-stack-service-3
                 port:
                   number: 8080
----
-
