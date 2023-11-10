@@ -5,7 +5,7 @@ import type { Ref, ComputedRef } from 'vue'
 
 export const useUserStore = defineStore('userStore', () => {
   // Consts
-  const baseURL = 'http://tech-stack-service-1'
+  const baseURL = '/api/users'
   // const baseURL = 'http://localhost:3000'
 
   // Refs/State
@@ -20,14 +20,14 @@ export const useUserStore = defineStore('userStore', () => {
   // Functions/Actions
   async function getUsers(): Promise<void> {
     loading = true
-    const res: Response = await fetch(baseURL + '/users')
+    const res: Response = await fetch(baseURL + '/v1/users/')
     const data = await res.json()
     users.value = data
     loading = false
   }
 
   async function addUser(product: User): Promise<void> {
-    const res: Response = await fetch(baseURL + '/users', {
+    const res: Response = await fetch(baseURL + '/v1/users/', {
       method: 'POST',
       body: JSON.stringify(product),
       headers: { 'Content-Type': 'application/json' },
@@ -44,7 +44,7 @@ export const useUserStore = defineStore('userStore', () => {
     users.value = users.value.filter((t: User): boolean => {
       return t.id !== id
     })
-    const res: Response = await fetch(baseURL + '/users/' + id, {
+    const res: Response = await fetch(baseURL + '/v1/users/' + id + '/', {
       method: 'DELETE',
     })
     if (res.status != 200) {

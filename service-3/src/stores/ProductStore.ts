@@ -4,6 +4,10 @@ import { ref, computed } from 'vue'
 import type { Ref, ComputedRef } from 'vue'
 
 export const useProductStore = defineStore('productStore', () => {
+  // Consts
+  const baseURL = '/api/products'
+  // const baseURL = 'http://localhost:3000'
+
   // Refs/State
   const products: Ref<Product[]> = ref([])
   let loading: boolean = false
@@ -16,14 +20,14 @@ export const useProductStore = defineStore('productStore', () => {
   // Functions/Actions
   async function getProducts(): Promise<void> {
     loading = true
-    const res: Response = await fetch('http://localhost:3000/products')
+    const res: Response = await fetch(baseURL + '/v1/products/')
     const data = await res.json()
     products.value = data
     loading = false
   }
 
   async function addProduct(product: Product): Promise<void> {
-    const res: Response = await fetch('http://localhost:3000/products', {
+    const res: Response = await fetch(baseURL + '/v1/products/', {
       method: 'POST',
       body: JSON.stringify(product),
       headers: { 'Content-Type': 'application/json' },
@@ -40,7 +44,7 @@ export const useProductStore = defineStore('productStore', () => {
     products.value = products.value.filter((t: Product): boolean => {
       return t.id !== id
     })
-    const res: Response = await fetch('http://localhost:3000/products/' + id, {
+    const res: Response = await fetch(baseURL + '/v1/products/' + id + '/', {
       method: 'DELETE',
     })
     if (res.status != 200) {
